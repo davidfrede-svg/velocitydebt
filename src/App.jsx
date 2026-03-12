@@ -127,7 +127,7 @@ function buildIllustration(annualPremium=12000,years=40){
 /* ── CSS ───────────────────────────────────────────── */
 const CSS = `
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{background:#060710;-webkit-font-smoothing:antialiased;}
+html,body{background:#060710;-webkit-font-smoothing:antialiased;font-size:16px;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes glow{0%,100%{box-shadow:0 0 10px #22D3A033}50%{box-shadow:0 0 26px #22D3A066}}
@@ -149,33 +149,33 @@ html,body{background:#060710;-webkit-font-smoothing:antialiased;}
 .hov:hover{opacity:.88}
 input,textarea,select{outline:none;font-family:'Syne',sans-serif;-webkit-appearance:none;}
 input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
-input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:2px;background:#1E2040;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#22D3A0;cursor:pointer}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:#1E2040;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#22D3A0;cursor:pointer;box-shadow:0 0 0 3px #22D3A022;}
 ::-webkit-scrollbar{width:2px;height:2px}
 ::-webkit-scrollbar-track{background:#060710}
 ::-webkit-scrollbar-thumb{background:#1E2040;border-radius:2px}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:flex;align-items:flex-end;justify-content:center}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;display:flex;align-items:flex-end;justify-content:center}
 @media(min-width:600px){.modal-overlay{align-items:center}}
-.modal-sheet{background:#0B0C1E;border-radius:20px 20px 0 0;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;padding:20px}
-@media(min-width:600px){.modal-sheet{border-radius:20px;max-height:85vh}}
+.modal-sheet{background:#0B0C1E;border-radius:24px 24px 0 0;width:100%;max-width:600px;max-height:92vh;overflow-y:auto;padding:28px}
+@media(min-width:600px){.modal-sheet{border-radius:24px;max-height:88vh}}
 .tab-bar{display:flex;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;}
 .tab-bar::-webkit-scrollbar{display:none}
-.bottom-nav{display:flex;background:#0B0C1E;border-top:1px solid #161830;position:fixed;bottom:0;left:0;right:0;z-index:90;padding:0 0 env(safe-area-inset-bottom)}
+.bottom-nav{display:flex;background:#0B0C1E;border-top:1px solid #161830;position:fixed;bottom:0;left:0;right:0;z-index:90;padding:6px 0 env(safe-area-inset-bottom)}
 @media(min-width:768px){.bottom-nav{display:none}}
 .desktop-tabs{display:none}
 @media(min-width:768px){.desktop-tabs{display:flex}}
-.page-content{padding:16px;padding-bottom:80px;max-width:760px;margin:0 auto;}
-@media(min-width:768px){.page-content{padding:24px;padding-bottom:24px;}}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.page-content{padding:20px;padding-bottom:96px;max-width:900px;margin:0 auto;}
+@media(min-width:768px){.page-content{padding:32px;padding-bottom:32px;}}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 @media(max-width:480px){.grid-3{grid-template-columns:1fr 1fr}}
-.row{display:flex;gap:10px;align-items:center}
-.col{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;gap:12px;align-items:center}
+.col{display:flex;flex-direction:column;gap:12px}
 `;
 
 /* ── MICRO UI ──────────────────────────────────────── */
 const Tag = ({label,color=T.green}) => (
-  <span style={{background:`${color}18`,border:`1px solid ${color}33`,color,fontSize:9,fontWeight:800,padding:"2px 8px",borderRadius:100,letterSpacing:1.5,whiteSpace:"nowrap"}}>{label}</span>
+  <span style={{background:`${color}18`,border:`1px solid ${color}33`,color,fontSize:11,fontWeight:800,padding:"3px 10px",borderRadius:100,letterSpacing:1.5,whiteSpace:"nowrap"}}>{label}</span>
 );
 
 const Card = ({children,accent,style={}}) => (
@@ -187,28 +187,28 @@ const Card = ({children,accent,style={}}) => (
 
 const Input = ({label,value,onChange,type="text",prefix,suffix,style={}}) => (
   <div style={{...style}}>
-    {label&&<div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:5,textTransform:"uppercase"}}>{label}</div>}
-    <div style={{display:"flex",alignItems:"center",background:T.surf2,border:`1px solid ${T.border2}`,borderRadius:9,overflow:"hidden"}}>
-      {prefix&&<span style={{padding:"0 10px",color:T.dim,fontSize:13,borderRight:`1px solid ${T.border2}`,background:T.bg}}>{prefix}</span>}
+    {label&&<div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:6,textTransform:"uppercase"}}>{label}</div>}
+    <div style={{display:"flex",alignItems:"center",background:T.surf2,border:`1px solid ${T.border2}`,borderRadius:10,overflow:"hidden"}}>
+      {prefix&&<span style={{padding:"0 14px",color:T.dim,fontSize:15,borderRight:`1px solid ${T.border2}`,background:T.bg}}>{prefix}</span>}
       <input type={type} value={value} onChange={onChange}
-        style={{flex:1,background:"transparent",color:T.text,padding:"10px 12px",fontSize:14,fontFamily:type==="number"?"'JetBrains Mono',monospace":"'Syne',sans-serif",fontWeight:600,minWidth:0}}/>
-      {suffix&&<span style={{padding:"0 10px",color:T.dim,fontSize:11,borderLeft:`1px solid ${T.border2}`}}>{suffix}</span>}
+        style={{flex:1,background:"transparent",color:T.text,padding:"13px 15px",fontSize:16,fontFamily:type==="number"?"'JetBrains Mono',monospace":"'Syne',sans-serif",fontWeight:600,minWidth:0}}/>
+      {suffix&&<span style={{padding:"0 14px",color:T.dim,fontSize:14,borderLeft:`1px solid ${T.border2}`}}>{suffix}</span>}
     </div>
   </div>
 );
 
 const StatBox = ({label,value,sub,color=T.green,small=false}) => (
-  <div style={{background:T.surf2,border:`1px solid ${T.border}`,borderRadius:12,padding:"12px 14px",flex:1,minWidth:0}}>
-    <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:4,textTransform:"uppercase"}}>{label}</div>
-    <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:small?18:22,color,letterSpacing:1,lineHeight:1.1}}>{value}</div>
-    {sub&&<div style={{fontSize:10,color:T.dim,marginTop:3}}>{sub}</div>}
+  <div style={{background:T.surf2,border:`1px solid ${T.border}`,borderRadius:14,padding:"16px 18px",flex:1,minWidth:0}}>
+    <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:6,textTransform:"uppercase"}}>{label}</div>
+    <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:small?26:34,color,letterSpacing:1,lineHeight:1.1}}>{value}</div>
+    {sub&&<div style={{fontSize:12,color:T.dim,marginTop:4}}>{sub}</div>}
   </div>
 );
 
 /* ── SPARKLINE ─────────────────────────────────────── */
-const Spark = ({snaps=[],color,h=80}) => {
+const Spark = ({snaps=[],color,h=110}) => {
   if(snaps.length<2) return <div style={{height:h,background:T.surf2,borderRadius:8}}/>;
-  const W=400;
+  const W=800;
   const maxV=Math.max(...snaps.map(s=>s.total),1);
   const maxM=snaps[snaps.length-1]?.month||1;
   const pts=snaps.map(s=>`${(s.month/maxM)*W},${h-(s.total/maxV)*h}`).join(" ");
@@ -221,7 +221,7 @@ const Spark = ({snaps=[],color,h=80}) => {
         </linearGradient>
       </defs>
       <polygon points={`0,${h} ${pts} ${W},${h}`} fill={`url(#g${color.replace("#","")})`}/>
-      <polyline points={pts} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <polyline points={pts} fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 };
@@ -233,11 +233,11 @@ const UpgradeModal = ({onClose, feature="", onSelectMonthly, onSelectYearly}) =>
       <div style={{textAlign:"center",padding:"8px 0 20px"}}>
         <div style={{fontSize:48,marginBottom:12}}>⚡</div>
         <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:28,color:T.gold,letterSpacing:2,marginBottom:8}}>UPGRADE TO PRO</div>
-        <div style={{fontSize:13,color:T.dim,lineHeight:1.8,marginBottom:20}}>
+        <div style={{fontSize:15,color:T.dim,lineHeight:1.85,marginBottom:20}}>
           {feature||"This feature"} is part of VelocityDebt Pro — our AI-powered plan that reads your real financial data and builds your personalized debt mission automatically.
         </div>
         <div style={{background:T.surf2,border:`1px solid ${T.border}`,borderRadius:14,padding:"16px",marginBottom:20,textAlign:"left"}}>
-          <div style={{fontSize:9,color:T.gold,fontWeight:800,letterSpacing:2,marginBottom:12}}>PRO INCLUDES EVERYTHING IN FREE, PLUS:</div>
+          <div style={{fontSize:11,color:T.gold,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>PRO INCLUDES EVERYTHING IN FREE, PLUS:</div>
           {[
             ["🤖","AI CSV/Excel Import","Upload your bank file — AI reads everything automatically"],
             ["⚡","Velocity Banking Engine","HELOC/LOC strategy with chunk payments"],
@@ -465,16 +465,16 @@ export default function App() {
         <div style={{position:"absolute",top:-40,right:-30,width:180,height:180,background:`radial-gradient(circle,${T.red}0C,transparent 70%)`,pointerEvents:"none"}}/>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:12}}>
           <div style={{flex:1,minWidth:0}}>
-            <div style={{fontSize:9,color:T.red,fontWeight:800,letterSpacing:2,marginBottom:6}}>🎯 YOUR DEBT MISSION</div>
+            <div style={{fontSize:11,color:T.red,fontWeight:800,letterSpacing:1.5,marginBottom:6}}>🎯 YOUR DEBT MISSION</div>
             <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(38px,10vw,64px)",color:T.text,letterSpacing:1,lineHeight:.95}}>{$c(totalDebt)}</div>
-            <div style={{fontSize:12,color:T.dim,marginTop:5}}>
+            <div style={{fontSize:14,color:T.dim,marginTop:6}}>
               {validDebts.length} debts · {$c(totalMin)}/mo minimums
             </div>
           </div>
           <div style={{textAlign:"right",flexShrink:0}}>
-            <div style={{fontSize:9,color:T.green,fontWeight:800,letterSpacing:1,marginBottom:3}}>DEBT-FREE</div>
-            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:22,color:T.green,letterSpacing:1}}>{addMo(activeSim.months)}</div>
-            <div style={{fontSize:11,color:T.dim}}>{fmt(activeSim.months)}</div>
+            <div style={{fontSize:11,color:T.green,fontWeight:800,letterSpacing:1,marginBottom:3}}>DEBT-FREE</div>
+            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:28,color:T.green,letterSpacing:1}}>{addMo(activeSim.months)}</div>
+            <div style={{fontSize:13,color:T.dim}}>{fmt(activeSim.months)}</div>
           </div>
         </div>
 
@@ -482,7 +482,7 @@ export default function App() {
         <div style={{display:"flex",gap:6,background:T.bg,borderRadius:10,padding:4,marginTop:14}}>
           {[["avalanche","🔥 Avalanche"],["snowball","⛄ Snowball"]].map(([id,lbl])=>(
             <button key={id} onClick={()=>setMethod(id)} className="btn"
-              style={{flex:1,padding:"9px",borderRadius:7,background:method===id?T.surf2:"transparent",color:method===id?T.text:T.muted,fontSize:12,fontWeight:method===id?800:600,transition:"all .2s"}}>
+              style={{flex:1,padding:"11px",borderRadius:8,background:method===id?T.surf2:"transparent",color:method===id?T.text:T.muted,fontSize:14,fontWeight:method===id?800:600,transition:"all .2s"}}>
               {lbl}
             </button>
           ))}
@@ -497,8 +497,8 @@ export default function App() {
         {/* Extra payment slider */}
         <div style={{marginTop:14}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
-            <span style={{fontSize:11,color:T.dim}}>Extra monthly payment</span>
-            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:14,color:T.green,fontWeight:700}}>{$c(extra)}/mo</span>
+            <span style={{fontSize:14,color:T.dim}}>Extra monthly payment</span>
+            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:18,color:T.green,fontWeight:700}}>{$c(extra)}/mo</span>
           </div>
           <input type="range" min={0} max={3000} step={50} value={extra} onChange={e=>setExtra(+e.target.value)}
             style={{accentColor:T.green}}/>
@@ -517,7 +517,7 @@ export default function App() {
 
       {/* Trajectory */}
       <Card accent={T.green} style={{padding:"16px 16px 10px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:10}}>PAYOFF TRAJECTORY</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:10}}>PAYOFF TRAJECTORY</div>
         <Spark snaps={activeSim.snaps} color={T.green} h={90}/>
         <div style={{display:"flex",justifyContent:"space-between",fontSize:9,color:T.muted,marginTop:6}}>
           <span>Today</span>
@@ -527,18 +527,18 @@ export default function App() {
 
       {/* Attack order preview */}
       <Card accent={T.red} style={{padding:"16px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:10}}>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:10}}>
           {method==="avalanche"?"⚔️ ATTACK ORDER — HIGHEST RATE FIRST":"⛄ ATTACK ORDER — SMALLEST BALANCE FIRST"}
         </div>
         {[...validDebts].sort((a,b)=>method==="avalanche"?b.rate-a.rate:a.balance-b.balance).slice(0,4).map((d,i)=>(
           <div key={d.id} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:`1px solid ${T.border}`}}>
             <div style={{width:26,height:26,borderRadius:"50%",background:`${d.color}18`,border:`1px solid ${d.color}44`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Bebas Neue',sans-serif",fontSize:13,color:d.color,flexShrink:0}}>{i+1}</div>
             <div style={{flex:1,minWidth:0}}>
-              <div style={{fontWeight:700,fontSize:13,color:i===0?T.text:T.dim,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{d.name}</div>
-              <div style={{fontSize:10,color:T.muted}}>{d.rate}% APR · min {$c(d.min)}/mo</div>
+              <div style={{fontWeight:700,fontSize:15,color:i===0?T.text:T.dim,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{d.name}</div>
+              <div style={{fontSize:13,color:T.muted}}>{d.rate}% APR · min {$c(d.min)}/mo</div>
             </div>
             <div style={{textAlign:"right",flexShrink:0}}>
-              <div style={{fontFamily:"'JetBrains Mono',monospace",color:d.color,fontWeight:700,fontSize:14}}>{$c(d.balance)}</div>
+              <div style={{fontFamily:"'JetBrains Mono',monospace",color:d.color,fontWeight:700,fontSize:16}}>{$c(d.balance)}</div>
               {i===0&&<Tag label="ATTACK" color={T.red}/>}
             </div>
           </div>
@@ -553,7 +553,7 @@ export default function App() {
           <div style={{fontSize:32,flexShrink:0}}>🚀</div>
           <div style={{flex:1}}>
             <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:18,color:T.gold,letterSpacing:1,marginBottom:2}}>SUPERCHARGE WITH PRO</div>
-            <div style={{fontSize:11,color:T.dim,lineHeight:1.5}}>AI CSV import · Velocity Banking · IUL strategy · Retirement planner</div>
+            <div style={{fontSize:13,color:T.dim,lineHeight:1.6}}>AI CSV import · Velocity Banking · IUL strategy · Retirement planner</div>
           </div>
           <div style={{color:T.gold,fontSize:18,flexShrink:0}}>→</div>
         </button>
@@ -561,7 +561,7 @@ export default function App() {
 
       {isPro&&aiResult&&(
         <Card accent={T.gold} style={{padding:"14px 16px",marginBottom:12}}>
-          <div style={{fontSize:9,color:T.gold,fontWeight:800,letterSpacing:2,marginBottom:8}}>🤖 AI INSIGHTS</div>
+          <div style={{fontSize:11,color:T.gold,fontWeight:800,letterSpacing:1.5,marginBottom:8}}>🤖 AI INSIGHTS</div>
           {aiResult.insights?.slice(0,3).map((ins,i)=>(
             <div key={i} style={{fontSize:12,color:T.dim,marginBottom:6,paddingLeft:8,borderLeft:`2px solid ${T.gold}44`}}>💡 {ins}</div>
           ))}
@@ -596,12 +596,12 @@ export default function App() {
                 {d.type==="credit_card"?"💳":d.type==="mortgage"?"🏡":d.type==="auto"?"🚗":"💰"}
               </div>
               <div style={{flex:1,minWidth:0}}>
-                <div style={{fontWeight:700,fontSize:14,color:T.text,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{d.name}</div>
-                <div style={{fontSize:10,color:T.muted}}>{d.type.replace("_"," ")} · {d.rate}% APR</div>
+                <div style={{fontWeight:700,fontSize:16,color:T.text,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{d.name}</div>
+                <div style={{fontSize:13,color:T.muted}}>{d.type.replace("_"," ")} · {d.rate}% APR</div>
               </div>
               <div style={{textAlign:"right",flexShrink:0}}>
-                <div style={{fontFamily:"'JetBrains Mono',monospace",color:d.color,fontWeight:800,fontSize:16}}>{$c(d.balance)}</div>
-                <div style={{fontSize:10,color:T.red}}>{$c(monthly)}/mo interest</div>
+                <div style={{fontFamily:"'JetBrains Mono',monospace",color:d.color,fontWeight:800,fontSize:18}}>{$c(d.balance)}</div>
+                <div style={{fontSize:12,color:T.red}}>{$c(monthly)}/mo interest</div>
               </div>
             </div>
             <div style={{display:"flex",gap:8,marginTop:10,alignItems:"center"}}>
@@ -620,7 +620,7 @@ export default function App() {
 
       {/* CSV/AI import — Pro gated */}
       <div style={{marginTop:16}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:10}}>IMPORT YOUR DATA</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:10}}>IMPORT YOUR DATA</div>
         <button className="btn hov" onClick={()=>gate("AI CSV Import — Upload your bank or Monarch Money export and let AI read everything automatically","AI CSV/Excel Import")}
           style={{width:"100%",background:`${T.gold}10`,border:`2px dashed ${T.gold}44`,borderRadius:14,padding:"20px 16px",display:"flex",flexDirection:"column",alignItems:"center",gap:8,cursor:"pointer",marginBottom:8}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
@@ -641,10 +641,10 @@ export default function App() {
   const renderStrategy = () => (
     <div className="fu">
       <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:26,color:T.text,letterSpacing:1,marginBottom:4}}>STRATEGY</div>
-      <div style={{fontSize:12,color:T.dim,marginBottom:14}}>Compare debt payoff methods</div>
+      <div style={{fontSize:14,color:T.dim,marginBottom:14}}>Compare debt payoff methods</div>
 
       <Card accent={T.blue} style={{padding:"16px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:10}}>PAYOFF METHOD</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:10}}>PAYOFF METHOD</div>
         {[
           {id:"avalanche",icon:"🔥",title:"Debt Avalanche",desc:"Attack highest interest rate first. Saves the most money.",color:T.red,sim:simAva},
           {id:"snowball", icon:"⛄",title:"Debt Snowball", desc:"Attack smallest balance first. Fastest psychological wins.",color:T.blue,sim:simSnow},
@@ -670,7 +670,7 @@ export default function App() {
       </Card>
 
       <Card accent={T.muted} style={{padding:"16px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:12}}>SIDE BY SIDE</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>SIDE BY SIDE</div>
         <div className="grid-2" style={{marginBottom:10}}>
           {[
             {label:"🔥 Avalanche",months:simAva.months,int:simAva.totalInt,color:T.red},
@@ -691,9 +691,9 @@ export default function App() {
       <Card accent={T.gold} style={{padding:"16px",marginBottom:12}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:12}}>
           <div style={{flex:1}}>
-            <div style={{fontSize:9,color:T.gold,fontWeight:800,letterSpacing:2,marginBottom:6}}>⚡ VELOCITY BANKING</div>
+            <div style={{fontSize:11,color:T.gold,fontWeight:800,letterSpacing:1.5,marginBottom:6}}>⚡ VELOCITY BANKING</div>
             <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:20,color:T.text,letterSpacing:1,marginBottom:6}}>USE YOUR INCOME AS A WEAPON</div>
-            <div style={{fontSize:12,color:T.dim,lineHeight:1.7,marginBottom:10}}>
+            <div style={{fontSize:14,color:T.dim,lineHeight:1.75,marginBottom:10}}>
               Deposit every paycheck into your HELOC/LOC. Pay expenses from it. Then deploy chunk payments to annihilate principal. Every dollar you earn reduces interest every single day.
             </div>
             {isPro?(
@@ -712,7 +712,7 @@ export default function App() {
       </Card>
 
       <Card accent={T.green} style={{padding:"16px"}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:12}}>CASH FLOW SETTINGS</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>CASH FLOW SETTINGS</div>
         <div style={{display:"flex",flexDirection:"column",gap:10}}>
           <Input label="Monthly Income" value={income} onChange={e=>setIncome(+e.target.value||0)} type="number" prefix="$"/>
           <Input label="Monthly Expenses" value={expenses} onChange={e=>setExpenses(+e.target.value||0)} type="number" prefix="$"/>
@@ -742,10 +742,10 @@ export default function App() {
     return (
     <div className="fu">
       <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:26,color:T.text,letterSpacing:1,marginBottom:4}}>KNOW YOUR NUMBERS</div>
-      <div style={{fontSize:12,color:T.dim,marginBottom:14}}>Your complete financial picture</div>
+      <div style={{fontSize:14,color:T.dim,marginBottom:14}}>Your complete financial picture</div>
 
       <Card accent={T.green} style={{padding:"16px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:12}}>💰 MONTHLY BUDGET</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>💰 MONTHLY BUDGET</div>
         {[
           {label:"Monthly Income",value:$c(income),color:T.green,sign:"+"},
           {label:"Debt Minimums",value:$c(totalMin),color:T.red,sign:"-"},
@@ -773,7 +773,7 @@ export default function App() {
       </Card>
 
       <Card accent={T.purple} style={{padding:"16px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:12}}>📐 DEBT-TO-INCOME RATIO</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>📐 DEBT-TO-INCOME RATIO</div>
         <div style={{display:"flex",gap:12,alignItems:"center",marginBottom:14,flexWrap:"wrap"}}>
           <div style={{textAlign:"center",minWidth:100}}>
             <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:52,color:dtiColor,letterSpacing:2,lineHeight:1}}>{dti.toFixed(1)}%</div>
@@ -803,7 +803,7 @@ export default function App() {
       </Card>
 
       <Card accent={T.purple} style={{padding:"16px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:12}}>📊 CREDIT SCORE</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>📊 CREDIT SCORE</div>
         {creditScore&&(
           <div style={{marginBottom:14}}>
             <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:10}}>
@@ -842,7 +842,7 @@ export default function App() {
   const renderIUL = () => (
     <div className="fu">
       <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:26,color:T.gold,letterSpacing:1,marginBottom:4}}>IUL / WHOLE LIFE STRATEGY</div>
-      <div style={{fontSize:12,color:T.dim,marginBottom:14}}>Your policy as a personal bank + wealth engine</div>
+      <div style={{fontSize:14,color:T.dim,marginBottom:14}}>Your policy as a personal bank + wealth engine</div>
 
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:12}}>
         {[
@@ -860,7 +860,7 @@ export default function App() {
       </div>
 
       <Card accent={T.gold} style={{padding:"16px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:12}}>POLICY CONFIGURATION</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>POLICY CONFIGURATION</div>
         <div style={{display:"flex",flexDirection:"column",gap:10}}>
           <div>
             <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:5}}>POLICY TYPE</div>
@@ -875,7 +875,7 @@ export default function App() {
       </Card>
 
       <Card accent={T.gold} style={{padding:"16px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:12}}>POLICY LOAN AVAILABILITY — YEAR BY YEAR</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>POLICY LOAN AVAILABILITY — YEAR BY YEAR</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(100px,1fr))",gap:6}}>
           {illustration.filter((_,i)=>i<12).map((row,i)=>(
             <div key={i} style={{background:T.bg,borderRadius:8,padding:"10px 8px",textAlign:"center",border:`1px solid ${T.border}`}}>
@@ -888,7 +888,7 @@ export default function App() {
       </Card>
 
       <Card accent={T.green} style={{padding:"16px"}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:10}}>CASH VALUE GROWTH</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:10}}>CASH VALUE GROWTH</div>
         <Spark snaps={illustration.map(r=>({month:r.year*12,total:r.cashValue}))} color={T.gold} h={100}/>
         <div style={{display:"flex",gap:8,marginTop:10,flexWrap:"wrap"}}>
           <StatBox label="@ Age 55" value={$c(illustration[12]?.cashValue||0)} color={T.gold} small/>
@@ -905,7 +905,7 @@ export default function App() {
     return (
     <div className="fu">
       <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:26,color:T.green,letterSpacing:1,marginBottom:4}}>RETIREMENT INCOME</div>
-      <div style={{fontSize:12,color:T.dim,marginBottom:14}}>Tax-free policy loan income for life</div>
+      <div style={{fontSize:14,color:T.dim,marginBottom:14}}>Tax-free policy loan income for life</div>
 
       <Card accent={T.green} style={{padding:"18px 16px",marginBottom:12}}>
         <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:14,color:T.muted,letterSpacing:2,marginBottom:4}}>STARTING AT AGE {client.retireAge}</div>
@@ -923,7 +923,7 @@ export default function App() {
       </div>
 
       <Card accent={T.gold} style={{padding:"16px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:12}}>RETIREMENT YEAR BY YEAR</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>RETIREMENT YEAR BY YEAR</div>
         {Array.from({length:10},(_,i)=>{
           const policyYr=yearToRetire+i;
           const cv=illustration[Math.min(policyYr,illustration.length-1)]?.cashValue||0;
@@ -944,7 +944,7 @@ export default function App() {
       </Card>
 
       <Card accent={T.muted} style={{padding:"16px"}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:12}}>CLIENT PROFILE</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>CLIENT PROFILE</div>
         <div className="grid-2">
           <Input label="Current Age" value={client.age} onChange={e=>setClient(p=>({...p,age:+e.target.value||0}))} type="number"/>
           <Input label="Retire At Age" value={client.retireAge} onChange={e=>setClient(p=>({...p,retireAge:+e.target.value||0}))} type="number"/>
@@ -958,7 +958,7 @@ export default function App() {
   const renderImport = () => (
     <div className="fu">
       <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:26,color:T.gold,letterSpacing:1,marginBottom:4}}>AI IMPORT</div>
-      <div style={{fontSize:12,color:T.dim,marginBottom:14}}>Upload your bank file or paste CSV — AI does the rest</div>
+      <div style={{fontSize:14,color:T.dim,marginBottom:14}}>Upload your bank file or paste CSV — AI does the rest</div>
 
       {aiStage==="analyzing"&&(
         <Card accent={T.green} style={{padding:"32px 16px",textAlign:"center",marginBottom:12}}>
@@ -985,7 +985,7 @@ export default function App() {
           </button>
 
           <Card accent={T.blue} style={{padding:"16px",marginBottom:12}}>
-            <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:10}}>OR PASTE CSV DATA</div>
+            <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:10}}>OR PASTE CSV DATA</div>
             <textarea value={csvText} onChange={e=>setCsvText(e.target.value)}
               placeholder={"Paste your transaction data here...\n\nDate, Merchant, Amount\n2026-03-10, Chase Sapphire Payment, -284.00\n2026-03-01, Publix, -87.43\n..."}
               style={{width:"100%",height:140,background:T.surf2,border:`1px solid ${T.border2}`,borderRadius:10,color:T.text,padding:"12px",fontSize:12,lineHeight:1.6,fontFamily:"'JetBrains Mono',monospace",resize:"none"}}/>
@@ -1005,7 +1005,7 @@ export default function App() {
 
       {aiResult&&aiStage==="done"&&(
         <Card accent={T.green} style={{padding:"16px",marginTop:12}}>
-          <div style={{fontSize:9,color:T.green,fontWeight:800,letterSpacing:2,marginBottom:10}}>✓ AI IMPORT COMPLETE</div>
+          <div style={{fontSize:11,color:T.green,fontWeight:800,letterSpacing:1.5,marginBottom:10}}>✓ AI IMPORT COMPLETE</div>
           <div style={{fontSize:13,color:T.dim,marginBottom:10}}>{aiResult.summary}</div>
           {aiResult.insights?.slice(0,3).map((ins,i)=>(
             <div key={i} style={{fontSize:12,color:T.dim,marginBottom:6,paddingLeft:8,borderLeft:`2px solid ${T.green}44`}}>💡 {ins}</div>
@@ -1023,7 +1023,7 @@ export default function App() {
   const renderCompare = () => (
     <div className="fu">
       <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:26,color:T.text,letterSpacing:1,marginBottom:4}}>SCENARIO COMPARISON</div>
-      <div style={{fontSize:12,color:T.dim,marginBottom:14}}>Traditional vs Velocity + IUL</div>
+      <div style={{fontSize:14,color:T.dim,marginBottom:14}}>Traditional vs Velocity + IUL</div>
 
       <div className="grid-2" style={{marginBottom:12}}>
         <Card accent={T.muted} style={{padding:"14px"}}>
@@ -1059,7 +1059,7 @@ export default function App() {
       </div>
 
       <Card accent={T.green} style={{padding:"16px",marginBottom:12}}>
-        <div style={{fontSize:9,color:T.green,fontWeight:800,letterSpacing:2,marginBottom:12}}>🏆 SCENARIO B ADVANTAGE</div>
+        <div style={{fontSize:11,color:T.green,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>🏆 SCENARIO B ADVANTAGE</div>
         <div className="grid-2">
           {[
             {l:"Time Saved",v:fmt(simBase.months-simVel.months),c:T.green},
@@ -1073,7 +1073,7 @@ export default function App() {
       </Card>
 
       <Card accent={T.blue} style={{padding:"16px"}}>
-        <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:10}}>TRAJECTORY COMPARISON</div>
+        <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:10}}>TRAJECTORY COMPARISON</div>
         <Spark snaps={simVel.snaps} color={T.gold} h={80}/>
         <div style={{display:"flex",gap:10,marginTop:8,flexWrap:"wrap"}}>
           {[{c:T.gold,l:`B: Velocity (${fmt(simVel.months)})`},{c:T.red,l:`A: Baseline (${fmt(simBase.months)})`}].map((x,i)=>(
@@ -1104,24 +1104,24 @@ export default function App() {
       <style>{CSS}</style>
 
       {/* ── TOP NAV ── */}
-      <nav style={{background:T.surf,borderBottom:`1px solid ${T.border}`,padding:"0 16px",display:"flex",alignItems:"center",justifyContent:"space-between",height:52,position:"sticky",top:0,zIndex:91,gap:10}}>
-        <div style={{display:"flex",alignItems:"center",gap:10}}>
-          <div style={{width:32,height:32,background:`linear-gradient(135deg,${T.red},${T.orange})`,borderRadius:9,display:"flex",alignItems:"center",justifyContent:"center",fontSize:15,flexShrink:0}}>⚡</div>
+      <nav style={{background:T.surf,borderBottom:`1px solid ${T.border}`,padding:"0 20px",display:"flex",alignItems:"center",justifyContent:"space-between",height:62,position:"sticky",top:0,zIndex:91,gap:12}}>
+        <div style={{display:"flex",alignItems:"center",gap:12}}>
+          <div style={{width:38,height:38,background:`linear-gradient(135deg,${T.red},${T.orange})`,borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>⚡</div>
           <div>
-            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:16,letterSpacing:2,lineHeight:1}}>VELOCITYDEBT</div>
-            <div style={{fontSize:8,color:T.muted,letterSpacing:1}}>{isPro?"PRO":"FREE PLAN"}</div>
+            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:20,letterSpacing:2,lineHeight:1}}>VELOCITYDEBT</div>
+            <div style={{fontSize:11,color:T.muted,letterSpacing:1}}>{isPro?"PRO":"FREE PLAN"}</div>
           </div>
         </div>
         <div style={{display:"flex",gap:8,alignItems:"center"}}>
           {!isPro&&(
             <button className="btn gold-glow" onClick={()=>setShowUpgrade(true)}
-              style={{background:`linear-gradient(135deg,${T.gold},${T.goldL})`,color:"#05060F",padding:"7px 14px",borderRadius:9,fontSize:11,fontWeight:800}}>
+              style={{background:`linear-gradient(135deg,${T.gold},${T.goldL})`,color:"#05060F",padding:"9px 18px",borderRadius:10,fontSize:13,fontWeight:800}}>
               Upgrade Pro
             </button>
           )}
           {isPro&&(
             <button className="btn" onClick={()=>setIsPro(false)}
-              style={{background:`${T.gold}18`,border:`1px solid ${T.gold}33`,color:T.gold,padding:"7px 12px",borderRadius:9,fontSize:11}}>
+              style={{background:`${T.gold}18`,border:`1px solid ${T.gold}33`,color:T.gold,padding:"9px 14px",borderRadius:10,fontSize:13}}>
               ✓ Pro
             </button>
           )}
@@ -1129,10 +1129,10 @@ export default function App() {
       </nav>
 
       {/* ── DESKTOP TABS ── */}
-      <div className="desktop-tabs" style={{background:T.surf,borderBottom:`1px solid ${T.border}`,padding:"0 24px",overflowX:"auto"}}>
+      <div className="desktop-tabs" style={{background:T.surf,borderBottom:`1px solid ${T.border}`,padding:"0 28px",overflowX:"auto"}}>
         {ALL_NAV.map(t=>(
           <button key={t.id} onClick={()=>setTab(t.id)} className="btn"
-            style={{background:"transparent",padding:"11px 14px",color:tab===t.id?T.green:T.muted,fontSize:12,fontWeight:tab===t.id?800:500,borderBottom:`2px solid ${tab===t.id?T.green:"transparent"}`,whiteSpace:"nowrap",transition:"color .2s"}}>
+            style={{background:"transparent",padding:"14px 18px",color:tab===t.id?T.green:T.muted,fontSize:14,fontWeight:tab===t.id?800:500,borderBottom:`2px solid ${tab===t.id?T.green:"transparent"}`,whiteSpace:"nowrap",transition:"color .2s"}}>
             {t.icon} {t.label}
           </button>
         ))}
@@ -1145,16 +1145,16 @@ export default function App() {
       <nav className="bottom-nav">
         {ALL_NAV.slice(0,5).map(t=>(
           <button key={t.id} onClick={()=>setTab(t.id)} className="btn"
-            style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:3,padding:"8px 4px",background:"transparent",color:tab===t.id?T.green:T.muted,borderTop:`2px solid ${tab===t.id?T.green:"transparent"}`,fontSize:10,fontWeight:tab===t.id?800:500,transition:"color .2s",minWidth:0}}>
-            <span style={{fontSize:18,lineHeight:1}}>{t.icon}</span>
-            <span style={{fontSize:9,letterSpacing:.3}}>{t.label}</span>
+            style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:4,padding:"10px 4px",background:"transparent",color:tab===t.id?T.green:T.muted,borderTop:`2px solid ${tab===t.id?T.green:"transparent"}`,fontSize:12,fontWeight:tab===t.id?800:500,transition:"color .2s",minWidth:0}}>
+            <span style={{fontSize:22,lineHeight:1}}>{t.icon}</span>
+            <span style={{fontSize:11,letterSpacing:.3}}>{t.label}</span>
           </button>
         ))}
         {ALL_NAV.length>5&&(
           <button className="btn" onClick={()=>setTab(ALL_NAV[5].id)}
-            style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:3,padding:"8px 4px",background:"transparent",color:T.muted,fontSize:10,fontWeight:500,minWidth:0}}>
-            <span style={{fontSize:18,lineHeight:1}}>•••</span>
-            <span style={{fontSize:9}}>More</span>
+            style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:4,padding:"10px 4px",background:"transparent",color:T.muted,fontSize:12,fontWeight:500,minWidth:0}}>
+            <span style={{fontSize:22,lineHeight:1}}>•••</span>
+            <span style={{fontSize:11}}>More</span>
           </button>
         )}
       </nav>
@@ -1189,7 +1189,7 @@ function HomeSim({income,totalMin}) {
   const dtiColor=dti<=36?T.green:dti<=43?T.yellow:T.red;
   return (
     <Card accent={T.blue} style={{padding:"16px"}}>
-      <div style={{fontSize:9,color:T.muted,fontWeight:800,letterSpacing:2,marginBottom:12}}>🏠 HOME PURCHASE READINESS</div>
+      <div style={{fontSize:11,color:T.muted,fontWeight:800,letterSpacing:1.5,marginBottom:12}}>🏠 HOME PURCHASE READINESS</div>
       <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:14}}>
         <Input label="Home Price" value={hp} onChange={e=>setHp(+e.target.value||0)} type="number" prefix="$"/>
         <div className="grid-2">
@@ -1216,7 +1216,7 @@ function ProGate({onUpgrade}) {
     <div className="fu" style={{textAlign:"center",padding:"40px 20px"}}>
       <div style={{fontSize:56,marginBottom:16}}>🔒</div>
       <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:28,color:T.gold,letterSpacing:2,marginBottom:8}}>PRO FEATURE</div>
-      <div style={{fontSize:13,color:T.dim,lineHeight:1.8,marginBottom:24,maxWidth:320,margin:"0 auto 24px"}}>This feature is available on VelocityDebt Pro. Upgrade to unlock AI import, IUL strategy, retirement planner, and more.</div>
+      <div style={{fontSize:15,color:T.dim,lineHeight:1.85,marginBottom:24,maxWidth:320,margin:"0 auto 24px"}}>This feature is available on VelocityDebt Pro. Upgrade to unlock AI import, IUL strategy, retirement planner, and more.</div>
       <button className="btn gold-glow" onClick={onUpgrade}
         style={{background:`linear-gradient(135deg,${T.gold},${T.goldL})`,color:"#05060F",padding:"16px 32px",borderRadius:12,fontSize:15,fontWeight:800}}>
         Upgrade to Pro — $14/mo →
