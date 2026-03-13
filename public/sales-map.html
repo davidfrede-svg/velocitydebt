@@ -3,331 +3,261 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<style>html, body { width: 100%; height: 100%; overflow: hidden; }</style>
 <title>County Sales Map</title>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    background: #0d0d1a;
-    color: #e0e0e0;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    font-size: 13px;
-    height: 100%;
+  html, body {
+    width: 100%; height: 100%;
+    background: #0a1a0a;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #e0e0e0;
   }
 
-  /* ── Header ── */
+  /* Full-screen map SVG */
+  #map-svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: block;
+  }
+
+  .county-path {
+    stroke: #0a1a0a;
+    stroke-width: 0.25;
+    cursor: pointer;
+  }
+  .county-path:hover { stroke: #fff; stroke-width: 1.2; opacity: 0.9; }
+
+  .state-border {
+    fill: none;
+    stroke: rgba(255,255,255,0.4);
+    stroke-width: 0.7;
+    pointer-events: none;
+  }
+
+  /* ── Thin header bar ── */
   #header {
-    background: #12122a;
-    border-bottom: 1px solid #1e1e3e;
-    padding: 4px 10px;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 32px;
+    background: rgba(5, 15, 5, 0.85);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
     display: flex;
     align-items: center;
+    padding: 0 10px;
     gap: 10px;
-    flex-shrink: 0;
-    min-height: 30px;
+    z-index: 10;
   }
   #header h1 {
     font-size: 12px;
-    font-weight: 600;
-    color: #ffffff;
-    letter-spacing: 0.4px;
+    font-weight: 700;
+    color: #fff;
     white-space: nowrap;
+    letter-spacing: 0.5px;
   }
-  .stat-pill {
-    background: #1a1a3a;
-    border: 1px solid #2a2a5a;
-    border-radius: 12px;
+  .pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
     padding: 2px 8px;
-    font-size: 11px;
-    color: #a0a0c0;
+    font-size: 10px;
+    color: #b0d0b0;
     white-space: nowrap;
   }
-  .stat-pill span { color: #ffd700; font-weight: 700; }
-
-  /* Live indicator */
-  #live-dot {
+  .pill b { color: #ffd700; }
+  #live {
+    margin-left: auto;
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 11px;
+    font-size: 10px;
     color: #4caf50;
-    margin-left: auto;
   }
-  #live-dot .dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
+  #live .dot {
+    width: 6px; height: 6px;
     background: #4caf50;
+    border-radius: 50%;
     animation: pulse 2s infinite;
   }
   @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(1.4); }
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.3; transform:scale(1.5); }
   }
 
-  /* ── Body ── */
-  #body {
-    display: flex;
-    flex: 1;
+  /* ── Top-20 overlay panel ── */
+  #panel {
+    position: absolute;
+    top: 40px;
+    left: 8px;
+    width: 175px;
+    max-height: calc(100% - 52px);
+    background: rgba(5, 18, 5, 0.88);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
   }
-
-  /* ── Sidebar ── */
-  #sidebar {
-    width: 160px;
-    min-width: 160px;
-    background: #12122a;
-    border-right: 1px solid #1e1e3e;
-    overflow-y: auto;
-    flex-shrink: 0;
-  }
-  #sidebar::-webkit-scrollbar { width: 4px; }
-  #sidebar::-webkit-scrollbar-track { background: #0d0d1a; }
-  #sidebar::-webkit-scrollbar-thumb { background: #2a2a5a; border-radius: 2px; }
-
-  #sidebar-title {
-    padding: 8px 10px 6px;
-    font-size: 11px;
+  #panel-title {
+    padding: 7px 10px 5px;
+    font-size: 10px;
     font-weight: 700;
-    color: #7070a0;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    border-bottom: 1px solid #1e1e3e;
-    position: sticky;
-    top: 0;
-    background: #12122a;
-    z-index: 1;
+    color: #7db87d;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
   }
-
-  .county-row {
-    padding: 6px 10px;
-    border-bottom: 1px solid #181830;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .county-row:hover { background: #1a1a3a; }
-  .county-row.selected { background: #1e1e4a; border-left: 3px solid #ffd700; }
-  .county-row .rank {
-    font-size: 10px;
-    color: #5050a0;
-    margin-right: 4px;
-  }
-  .county-row .name {
-    font-weight: 600;
-    color: #d0d0f0;
-    font-size: 12px;
-  }
-  .county-row .sub {
-    color: #6060a0;
-    font-size: 11px;
-    margin-top: 1px;
-  }
-  .county-row .bar-wrap {
-    height: 3px;
-    background: #1a1a3a;
-    border-radius: 2px;
-    margin-top: 4px;
-  }
-  .county-row .bar {
-    height: 3px;
-    background: linear-gradient(90deg, #e94560, #ffd700);
-    border-radius: 2px;
-  }
-
-  /* Detail panel (shown on county click) */
-  #detail-panel {
-    display: none;
-    padding: 8px 10px;
-    background: #0f0f25;
-    border-top: 1px solid #1e1e3e;
-  }
-  #detail-panel.visible { display: block; }
-  #detail-panel .dp-title {
-    font-weight: 700;
-    color: #ffd700;
-    font-size: 12px;
-    margin-bottom: 4px;
-  }
-  #detail-panel .contact-list {
-    font-size: 11px;
-    color: #8080b0;
-    max-height: 120px;
+  #county-list {
     overflow-y: auto;
-    line-height: 1.6;
-  }
-
-  /* ── Map area ── */
-  #map-wrap {
     flex: 1;
-    position: relative;
-    overflow: hidden;
   }
-  #map-svg {
-    width: 100%;
-    height: 100%;
-  }
-  .county-path {
-    stroke: #0d0d1a;
-    stroke-width: 0.3;
-    cursor: pointer;
-    transition: opacity 0.1s;
-  }
-  .county-path:hover { stroke: #ffffff; stroke-width: 1; opacity: 0.85; }
-  .state-border {
-    fill: none;
-    stroke: #ffffff;
-    stroke-width: 0.6;
-    stroke-opacity: 0.35;
-    pointer-events: none;
-  }
+  #county-list::-webkit-scrollbar { width: 3px; }
+  #county-list::-webkit-scrollbar-thumb { background: #2a5a2a; border-radius: 2px; }
 
-  /* ── Tooltip ── */
-  #tooltip {
-    position: absolute;
-    background: rgba(10,10,30,0.95);
-    border: 1px solid #2a2a5a;
-    border-radius: 6px;
-    padding: 7px 10px;
-    pointer-events: none;
-    font-size: 12px;
-    color: #e0e0f0;
-    display: none;
-    z-index: 100;
-    max-width: 200px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  .cr {
+    padding: 5px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: background 0.12s;
   }
-  #tooltip .tt-county { font-weight: 700; color: #ffffff; margin-bottom: 2px; }
-  #tooltip .tt-count { color: #ffd700; font-weight: 700; }
-  #tooltip .tt-hint { color: #5050a0; font-size: 11px; margin-top: 3px; }
+  .cr:hover { background: rgba(255,255,255,0.07); }
+  .cr.sel { background: rgba(255,215,0,0.1); border-left: 2px solid #ffd700; }
+  .cr-top { display: flex; align-items: baseline; gap: 4px; }
+  .cr-rank { font-size: 9px; color: #4a7a4a; }
+  .cr-name { font-size: 11px; font-weight: 600; color: #d0f0d0; }
+  .cr-sub { font-size: 10px; color: #5a8a5a; margin-top: 1px; }
+  .cr-bar { height: 2px; background: rgba(255,255,255,0.07); border-radius: 1px; margin-top: 3px; }
+  .cr-fill { height: 2px; background: linear-gradient(90deg,#4caf50,#ffd700); border-radius: 1px; }
+
+  /* ── Contact detail panel ── */
+  #detail {
+    display: none;
+    padding: 7px 8px;
+    background: rgba(0,10,0,0.6);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+    max-height: 120px;
+  }
+  #detail.show { display: block; }
+  #detail-title { font-size: 10px; font-weight: 700; color: #ffd700; margin-bottom: 3px; }
+  #detail-list { font-size: 10px; color: #7aaa7a; line-height: 1.7; overflow-y: auto; max-height: 90px; }
 
   /* ── Legend ── */
   #legend {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(10,10,30,0.85);
-    border: 1px solid #2a2a4a;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(5,15,5,0.85);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 6px;
-    padding: 7px 10px;
-    font-size: 11px;
-  }
-  #legend .legend-title {
-    color: #7070a0;
-    margin-bottom: 5px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    padding: 6px 9px;
     font-size: 10px;
+    z-index: 10;
   }
-  .legend-row { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
-  .legend-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
-  .legend-label { color: #9090b0; }
+  #legend .lt {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #5a8a5a;
+    margin-bottom: 4px;
+  }
+  .lr { display: flex; align-items: center; gap: 5px; margin-bottom: 2px; }
+  .ls { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .ll { color: #8aaa8a; }
 
-  /* ── Loading overlay ── */
-  #loading-overlay {
+  /* ── Tooltip ── */
+  #tip {
+    position: absolute;
+    background: rgba(5,20,5,0.95);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 6px 10px;
+    pointer-events: none;
+    font-size: 11px;
+    display: none;
+    z-index: 20;
+    max-width: 180px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.6);
+  }
+  #tip-name { font-weight: 700; color: #fff; margin-bottom: 2px; }
+  #tip-count { color: #ffd700; font-weight: 700; }
+
+  /* ── Loading ── */
+  #loading {
     position: absolute;
     inset: 0;
-    background: rgba(10,10,26,0.88);
+    background: rgba(5,15,5,0.9);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 200;
-    gap: 14px;
+    gap: 12px;
+    z-index: 30;
   }
-  #loading-overlay.hidden { display: none; }
-  .spinner {
-    width: 36px; height: 36px;
-    border: 3px solid #1a1a3a;
-    border-top-color: #e94560;
+  #loading.gone { display: none; }
+  .spin {
+    width: 32px; height: 32px;
+    border: 3px solid #1a3a1a;
+    border-top-color: #4caf50;
     border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+    animation: spin 0.7s linear infinite;
   }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  #loading-msg { color: #7070a0; font-size: 13px; text-align: center; max-width: 260px; line-height: 1.5; }
-  #loading-progress { color: #4040a0; font-size: 11px; }
-
-  /* Error banner */
-  #error-banner {
-    display: none;
-    position: absolute;
-    top: 10px; left: 50%; transform: translateX(-50%);
-    background: #3a0a0a;
-    border: 1px solid #8b0000;
-    border-radius: 6px;
-    padding: 8px 14px;
-    color: #ff8080;
-    font-size: 12px;
-    z-index: 300;
-  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  #load-msg { color: #5a9a5a; font-size: 12px; text-align: center; line-height: 1.5; }
 </style>
 </head>
 <body>
 
-<!-- Header -->
+<svg id="map-svg"></svg>
+
 <div id="header">
   <h1>County Sales Map</h1>
-  <div class="stat-pill">Sold: <span id="stat-total">—</span></div>
-  <div class="stat-pill">Counties: <span id="stat-counties">—</span></div>
-  <div class="stat-pill">Updated: <span id="stat-updated">—</span></div>
-  <div id="live-dot"><div class="dot"></div> LIVE</div>
+  <div class="pill">Sold: <b id="s-total">—</b></div>
+  <div class="pill">Counties: <b id="s-counties">—</b></div>
+  <div class="pill">Updated: <b id="s-updated">—</b></div>
+  <div id="live"><div class="dot"></div>LIVE</div>
 </div>
 
-<!-- Body -->
-<div id="body">
-  <!-- Sidebar -->
-  <div id="sidebar">
-    <div id="sidebar-title">Top Counties</div>
-    <div id="county-list"></div>
-    <div id="detail-panel">
-      <div class="dp-title" id="dp-title"></div>
-      <div class="contact-list" id="dp-contacts"></div>
-    </div>
+<div id="panel">
+  <div id="panel-title">Top 20 Counties</div>
+  <div id="county-list"></div>
+  <div id="detail">
+    <div id="detail-title"></div>
+    <div id="detail-list"></div>
   </div>
+</div>
 
-  <!-- Map -->
-  <div id="map-wrap">
-    <svg id="map-svg"></svg>
-    <div id="tooltip">
-      <div class="tt-county" id="tt-county"></div>
-      <div class="tt-count" id="tt-count"></div>
-      <div class="tt-hint" id="tt-hint"></div>
-    </div>
-    <div id="legend">
-      <div class="legend-title">Sales Count</div>
-      <div class="legend-row"><div class="legend-swatch" style="background:#1a4d1a"></div><div class="legend-label">0 (no sales)</div></div>
-      <div class="legend-row"><div class="legend-swatch" style="background:#16213e"></div><div class="legend-label">1–2</div></div>
-      <div class="legend-row"><div class="legend-swatch" style="background:#0f3460"></div><div class="legend-label">3–5</div></div>
-      <div class="legend-row"><div class="legend-swatch" style="background:#e94560"></div><div class="legend-label">6–10</div></div>
-      <div class="legend-row"><div class="legend-swatch" style="background:#ff6b35"></div><div class="legend-label">11–20</div></div>
-      <div class="legend-row"><div class="legend-swatch" style="background:#ffd700"></div><div class="legend-label">21+</div></div>
-    </div>
-    <div id="loading-overlay">
-      <div class="spinner"></div>
-      <div id="loading-msg">Loading live sales data…<br><small style="color:#3a3a7a">First load may take up to 60 seconds</small></div>
-      <div id="loading-progress"></div>
-    </div>
-    <div id="error-banner"></div>
-  </div>
+<div id="legend">
+  <div class="lt">Sales</div>
+  <div class="lr"><div class="ls" style="background:#1a4d1a"></div><div class="ll">0</div></div>
+  <div class="lr"><div class="ls" style="background:#16213e"></div><div class="ll">1–2</div></div>
+  <div class="lr"><div class="ls" style="background:#0f3460"></div><div class="ll">3–5</div></div>
+  <div class="lr"><div class="ls" style="background:#e94560"></div><div class="ll">6–10</div></div>
+  <div class="lr"><div class="ls" style="background:#ff6b35"></div><div class="ll">11–20</div></div>
+  <div class="lr"><div class="ls" style="background:#ffd700"></div><div class="ll">21+</div></div>
+</div>
+
+<div id="tip">
+  <div id="tip-name"></div>
+  <div id="tip-count"></div>
+</div>
+
+<div id="loading">
+  <div class="spin"></div>
+  <div id="load-msg">Loading live sales data…<br><small style="color:#3a6a3a;font-size:10px">First load may take ~60 seconds</small></div>
 </div>
 
 <script>
-// ── Color scale ───────────────────────────────────────────────────────────────
-function countyColor(count) {
-  if (!count || count === 0) return '#1a4d1a';  // dark forest green = no sales
-  if (count <= 2)  return '#16213e';
-  if (count <= 5)  return '#0f3460';
-  if (count <= 10) return '#e94560';
-  if (count <= 20) return '#ff6b35';
-  return '#ffd700';
-}
-
-// ── State abbreviation lookup ─────────────────────────────────────────────────
 const STATE_FIPS = {
   "01":"AL","02":"AK","04":"AZ","05":"AR","06":"CA","08":"CO","09":"CT",
   "10":"DE","11":"DC","12":"FL","13":"GA","15":"HI","16":"ID","17":"IL",
@@ -339,243 +269,154 @@ const STATE_FIPS = {
   "55":"WI","56":"WY"
 };
 
-// ── App state ─────────────────────────────────────────────────────────────────
-let salesData = {};    // countyFips → {county, state, count, contacts}
-let topoData = null;   // cached topojson
-let currentSelected = null;
-
-// ── Fetch sales data from API ─────────────────────────────────────────────────
-async function fetchSalesData() {
-  const resp = await fetch('/api/county-map');
-  if (!resp.ok) throw new Error(`API error: ${resp.status}`);
-  const json = await resp.json();
-
-  if (json.loading) {
-    // Server still fetching — retry in 10 seconds
-    document.getElementById('loading-progress').textContent = 'Server is gathering data from GHL — retrying in 10s…';
-    setTimeout(fetchSalesData, 10000);
-    return null;
-  }
-
-  // Update header stats
-  document.getElementById('stat-total').textContent = json.total.toLocaleString();
-  document.getElementById('stat-counties').textContent = (json.counties || []).length;
-  if (json.lastUpdated) {
-    const d = new Date(json.lastUpdated);
-    document.getElementById('stat-updated').textContent =
-      d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  }
-
-  return json.counties || [];
+function countyColor(n) {
+  if (!n) return '#1a4d1a';
+  if (n <= 2)  return '#16213e';
+  if (n <= 5)  return '#0f3460';
+  if (n <= 10) return '#e94560';
+  if (n <= 20) return '#ff6b35';
+  return '#ffd700';
 }
 
-// ── Build county name → data map (for SVG coloring) ──────────────────────────
-function buildSalesIndex(counties) {
-  const idx = {};
-  for (const c of counties) {
-    // key: "county_name|state_abbr" (lowercase for lookup)
-    const key = `${c.county.toLowerCase()}|${c.state.toLowerCase()}`;
-    idx[key] = c;
+let topo = null, salesIdx = {}, selRow = null;
+
+function getKey(f) {
+  const sf = String(f.id).padStart(5,'0').slice(0,2);
+  return (f.properties.name||'').toLowerCase() + '|' + (STATE_FIPS[sf]||'').toLowerCase();
+}
+
+async function fetchData() {
+  const r = await fetch('/api/county-map');
+  if (!r.ok) throw new Error('API ' + r.status);
+  const j = await r.json();
+  if (j.loading) {
+    document.getElementById('load-msg').innerHTML = 'Server gathering GHL data…<br><small style="color:#3a6a3a;font-size:10px">Retrying in 10s</small>';
+    setTimeout(fetchData, 10000);
+    return null;
   }
+  document.getElementById('s-total').textContent = (j.total||0).toLocaleString();
+  document.getElementById('s-counties').textContent = (j.counties||[]).length;
+  if (j.lastUpdated) {
+    const d = new Date(j.lastUpdated);
+    document.getElementById('s-updated').textContent = d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  }
+  return j.counties || [];
+}
+
+function buildIdx(counties) {
+  const idx = {};
+  for (const c of counties) idx[c.county.toLowerCase()+'|'+c.state.toLowerCase()] = c;
   return idx;
 }
 
-// US Atlas county name lookup needs FIPS → name. We'll use the TopoJSON properties.
-function getCountyKey(feature) {
-  // properties.name is the county name from us-atlas
-  // properties.state is the 2-digit FIPS code
-  const stateFips = String(feature.id).padStart(5, '0').substring(0, 2);
-  const stateAbbr = STATE_FIPS[stateFips] || '';
-  const countyName = feature.properties.name || '';
-  return `${countyName.toLowerCase()}|${stateAbbr.toLowerCase()}`;
-}
-
-// ── Render sidebar ────────────────────────────────────────────────────────────
-function renderSidebar(counties, salesIndex) {
+function renderPanel(counties) {
   const list = document.getElementById('county-list');
   list.innerHTML = '';
-
-  const top20 = counties.slice(0, 20);
-  const maxCount = top20.length > 0 ? top20[0].count : 1;
-
-  top20.forEach((c, i) => {
-    const row = document.createElement('div');
-    row.className = 'county-row';
-    row.dataset.key = `${c.county.toLowerCase()}|${c.state.toLowerCase()}`;
-    row.innerHTML = `
-      <div>
-        <span class="rank">#${i + 1}</span>
-        <span class="name">${c.county}</span>
-      </div>
-      <div class="sub">${c.state} &bull; ${c.count} sold</div>
-      <div class="bar-wrap"><div class="bar" style="width:${Math.round((c.count / maxCount) * 100)}%"></div></div>
-    `;
-    row.addEventListener('click', () => selectCounty(c, row));
-    list.appendChild(row);
+  const top = counties.slice(0,20);
+  const max = top[0]?.count || 1;
+  top.forEach((c,i) => {
+    const d = document.createElement('div');
+    d.className = 'cr';
+    d.dataset.key = c.county.toLowerCase()+'|'+c.state.toLowerCase();
+    d.innerHTML = `<div class="cr-top"><span class="cr-rank">#${i+1}</span><span class="cr-name">${c.county}</span></div>
+      <div class="cr-sub">${c.state} &bull; ${c.count} sold</div>
+      <div class="cr-bar"><div class="cr-fill" style="width:${Math.round(c.count/max*100)}%"></div></div>`;
+    d.addEventListener('click', () => selectCounty(c, d));
+    list.appendChild(d);
   });
 }
 
-// ── Select / deselect county ──────────────────────────────────────────────────
-function selectCounty(c, rowEl) {
-  // Deselect previous
-  document.querySelectorAll('.county-row.selected').forEach(el => el.classList.remove('selected'));
-
-  if (currentSelected === rowEl) {
-    currentSelected = null;
-    document.getElementById('detail-panel').classList.remove('visible');
-    return;
-  }
-
-  currentSelected = rowEl;
-  rowEl.classList.add('selected');
-
-  const panel = document.getElementById('detail-panel');
-  panel.classList.add('visible');
-  document.getElementById('dp-title').textContent = `${c.county}, ${c.state} (${c.count} sold)`;
-  const names = (c.contacts || []);
-  document.getElementById('dp-contacts').innerHTML =
-    names.length > 0
-      ? names.map(n => `• ${n}`).join('<br>')
-      : '<span style="color:#3a3a6a">No contact names available</span>';
-
-  // Scroll detail panel into view
-  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+function selectCounty(c, row) {
+  document.querySelectorAll('.cr.sel').forEach(e => e.classList.remove('sel'));
+  const det = document.getElementById('detail');
+  if (selRow === row) { selRow = null; det.classList.remove('show'); return; }
+  selRow = row;
+  row.classList.add('sel');
+  document.getElementById('detail-title').textContent = `${c.county}, ${c.state} — ${c.count} sold`;
+  document.getElementById('detail-list').innerHTML = (c.contacts||[]).map(n=>`• ${n}`).join('<br>') || '<span style="color:#3a5a3a">No names</span>';
+  det.classList.add('show');
 }
 
-// ── Render D3 map ─────────────────────────────────────────────────────────────
-function renderMap(usGeo, salesIndex) {
-  const wrap = document.getElementById('map-wrap');
+function renderMap(usGeo, idx) {
   const svg = d3.select('#map-svg');
   svg.selectAll('*').remove();
+  const W = window.innerWidth, H = window.innerHeight;
+  svg.attr('width', W).attr('height', H);
 
-  const W = wrap.clientWidth;
-  const H = wrap.clientHeight;
-
-  const projection = d3.geoAlbersUsa()
-    .fitSize([W, H], topojson.feature(usGeo, usGeo.objects.counties));
-
-  const path = d3.geoPath().projection(projection);
-
+  const proj = d3.geoAlbersUsa().fitSize([W, H],
+    topojson.feature(usGeo, usGeo.objects.counties));
+  const path = d3.geoPath().projection(proj);
   const g = svg.append('g');
 
-  // Counties
   g.selectAll('.county-path')
     .data(topojson.feature(usGeo, usGeo.objects.counties).features)
     .join('path')
-    .attr('class', 'county-path')
+    .attr('class','county-path')
     .attr('d', path)
-    .attr('fill', d => {
-      const key = getCountyKey(d);
-      const entry = salesIndex[key];
-      return countyColor(entry ? entry.count : 0);
+    .attr('fill', d => { const e = idx[getKey(d)]; return countyColor(e?.count); })
+    .on('mousemove', (ev,d) => {
+      const e = idx[getKey(d)];
+      const sf = String(d.id).padStart(5,'0').slice(0,2);
+      document.getElementById('tip-name').textContent = `${d.properties.name}, ${STATE_FIPS[sf]||'?'}`;
+      document.getElementById('tip-count').textContent = e ? e.count+' sold' : 'No sales';
+      const tip = document.getElementById('tip');
+      tip.style.display = 'block';
+      let x = ev.clientX+14, y = ev.clientY-12;
+      if (x+190 > W) x = ev.clientX-195;
+      if (y+60 > H)  y = ev.clientY-65;
+      tip.style.left = x+'px'; tip.style.top = y+'px';
     })
-    .on('mousemove', (event, d) => {
-      const key = getCountyKey(d);
-      const entry = salesIndex[key];
-      const tt = document.getElementById('tooltip');
-      const stateFips = String(d.id).padStart(5, '0').substring(0, 2);
-      const stateAbbr = STATE_FIPS[stateFips] || '??';
-      document.getElementById('tt-county').textContent = `${d.properties.name}, ${stateAbbr}`;
-      document.getElementById('tt-count').textContent = entry ? `${entry.count} sold` : 'No sales data';
-      document.getElementById('tt-hint').textContent = entry ? 'Click sidebar entry to see contacts' : '';
-      tt.style.display = 'block';
-
-      const rect = wrap.getBoundingClientRect();
-      let x = event.clientX - rect.left + 12;
-      let y = event.clientY - rect.top - 10;
-      // Keep tooltip within bounds
-      if (x + 210 > W) x -= 220;
-      if (y + 80 > H)  y -= 80;
-      tt.style.left = x + 'px';
-      tt.style.top  = y + 'px';
-    })
-    .on('mouseleave', () => {
-      document.getElementById('tooltip').style.display = 'none';
-    })
-    .on('click', (event, d) => {
-      const key = getCountyKey(d);
-      const entry = salesIndex[key];
-      if (!entry) return;
-      // Find the corresponding sidebar row
-      const rowEl = document.querySelector(`.county-row[data-key="${key}"]`);
-      if (rowEl) {
-        selectCounty(entry, rowEl);
-        rowEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+    .on('mouseleave', () => { document.getElementById('tip').style.display='none'; })
+    .on('click', (ev,d) => {
+      const key = getKey(d);
+      const e = idx[key];
+      if (!e) return;
+      const row = document.querySelector(`.cr[data-key="${key}"]`);
+      if (row) { selectCounty(e, row); row.scrollIntoView({block:'nearest'}); }
     });
 
-  // State borders
   g.append('path')
-    .datum(topojson.mesh(usGeo, usGeo.objects.states, (a, b) => a !== b))
-    .attr('class', 'state-border')
+    .datum(topojson.mesh(usGeo, usGeo.objects.states, (a,b)=>a!==b))
+    .attr('class','state-border')
     .attr('d', path);
 }
 
-// ── Main ──────────────────────────────────────────────────────────────────────
 async function init() {
-  const overlay = document.getElementById('loading-overlay');
-  const errorBanner = document.getElementById('error-banner');
-
   try {
-    // Fetch TopoJSON + Sales data in parallel
-    document.getElementById('loading-msg').textContent = 'Loading map data…';
-
     const [usGeo, counties] = await Promise.all([
-      topoData
-        ? Promise.resolve(topoData)
-        : fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json').then(r => r.json()),
-      fetchSalesData(),
+      fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json').then(r=>r.json()),
+      fetchData()
     ]);
-
-    if (!counties) return; // still loading on server, retry scheduled
-
-    topoData = usGeo;
-
-    const salesIndex = buildSalesIndex(counties);
-    salesData = salesIndex;
-
-    overlay.classList.add('hidden');
-
-    renderSidebar(counties, salesIndex);
-    renderMap(usGeo, salesIndex);
-  } catch (err) {
-    console.error(err);
-    overlay.classList.add('hidden');
-    errorBanner.textContent = `Error loading data: ${err.message}`;
-    errorBanner.style.display = 'block';
-    setTimeout(() => { errorBanner.style.display = 'none'; }, 8000);
+    if (!counties) return;
+    topo = usGeo;
+    salesIdx = buildIdx(counties);
+    document.getElementById('loading').classList.add('gone');
+    renderPanel(counties);
+    renderMap(usGeo, salesIdx);
+  } catch(err) {
+    document.getElementById('load-msg').textContent = 'Error: '+err.message;
   }
 }
 
-// ── Refresh data every 15 minutes without full reload ────────────────────────
-async function refreshData() {
+async function refresh() {
   try {
-    const counties = await fetchSalesData();
-    if (!counties || !topoData) return;
-    const salesIndex = buildSalesIndex(counties);
-    salesData = salesIndex;
-    renderSidebar(counties, salesIndex);
-    renderMap(topoData, salesIndex);
-  } catch (err) {
-    console.warn('Auto-refresh failed:', err.message);
-  }
+    const counties = await fetchData();
+    if (!counties || !topo) return;
+    salesIdx = buildIdx(counties);
+    renderPanel(counties);
+    renderMap(topo, salesIdx);
+  } catch(e) {}
 }
 
-// ── Responsive resize (ResizeObserver works inside iframes) ───────────────────
-let resizeTimer;
-const ro = new ResizeObserver(() => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    if (topoData && Object.keys(salesData).length) {
-      renderMap(topoData, salesData);
-    }
-  }, 150);
-});
-ro.observe(document.getElementById('map-wrap'));
+// Redraw on any resize (works in iframes)
+let rt;
+new ResizeObserver(() => {
+  clearTimeout(rt);
+  rt = setTimeout(() => { if (topo && Object.keys(salesIdx).length) renderMap(topo, salesIdx); }, 100);
+}).observe(document.body);
 
-// ── Boot ──────────────────────────────────────────────────────────────────────
 init();
-setInterval(refreshData, 15 * 60 * 1000); // refresh every 15 min
+setInterval(refresh, 15*60*1000);
 </script>
 </body>
 </html>
