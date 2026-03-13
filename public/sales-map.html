@@ -10,7 +10,9 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html, body {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 900px;        /* fixed height — GHL sizes widget to content height */
+    min-height: 900px;
     background: #0a1a0a;
     overflow: hidden;
     font-family: 'Segoe UI', system-ui, sans-serif;
@@ -94,16 +96,16 @@
     position: absolute;
     top: 40px;
     left: 8px;
-    width: 175px;
+    width: 200px;
     max-height: calc(100% - 52px);
-    background: rgba(5, 18, 5, 0.88);
+    background: rgba(5, 18, 5, 0.92);
     backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
     border-radius: 8px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    z-index: 10;
+    z-index: 50;           /* always above tooltip */
   }
   #panel-title {
     padding: 7px 10px 5px;
@@ -185,7 +187,7 @@
     pointer-events: none;
     font-size: 11px;
     display: none;
-    z-index: 20;
+    z-index: 40;           /* below panel (50) so panel always wins */
     max-width: 180px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.6);
   }
@@ -359,7 +361,8 @@ function selectCounty(c, row) {
 function renderMap(usGeo, idx) {
   const svg = d3.select('#map-svg');
   svg.selectAll('*').remove();
-  const W = window.innerWidth, H = window.innerHeight;
+  const W = document.body.clientWidth  || window.innerWidth;
+  const H = document.body.clientHeight || window.innerHeight;
   svg.attr('width', W).attr('height', H);
 
   const proj = d3.geoAlbersUsa().fitSize([W, H],
@@ -380,10 +383,12 @@ function renderMap(usGeo, idx) {
       document.getElementById('tip-count').textContent = e ? e.count+' sold' : 'No sales';
       const tip = document.getElementById('tip');
       tip.style.display = 'block';
-      let x = ev.clientX+14, y = ev.clientY-12;
-      if (x+190 > W) x = ev.clientX-195;
-      if (y+60 > H)  y = ev.clientY-65;
-      tip.style.left = x+'px'; tip.style.top = y+'px';
+      let x = ev.clientX + 14, y = ev.clientY - 12;
+      if (x + 190 > W) x = ev.clientX - 200;  // flip left if near right edge
+      if (x < 220) x = 220;                    // never overlap the left panel
+      if (y + 60 > H) y = ev.clientY - 65;
+      if (y < 36) y = 36;
+      tip.style.left = x + 'px'; tip.style.top = y + 'px';
     })
     .on('mouseleave', () => { document.getElementById('tip').style.display='none'; })
     .on('click', (ev,d) => {
