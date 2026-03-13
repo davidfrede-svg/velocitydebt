@@ -317,7 +317,14 @@ async function fetchData() {
 
 function buildIdx(counties) {
   const idx = {};
-  for (const c of counties) idx[c.county.toLowerCase()+'|'+c.state.toLowerCase()] = c;
+  for (const c of counties) {
+    // us-atlas TopoJSON has bare names ("Marion") but our data has "Marion County".
+    // Strip county/parish/borough suffix so keys match the TopoJSON properties.name
+    const bare = c.county.toLowerCase()
+      .replace(/\s+(county|parish|borough|census area|municipality|city and borough|area)\s*$/, '')
+      .trim();
+    idx[bare + '|' + c.state.toLowerCase()] = c;
+  }
   return idx;
 }
 
