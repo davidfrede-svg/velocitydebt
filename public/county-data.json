@@ -1,0 +1,3821 @@
+[
+  {
+    "county": "Marion",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 40,
+    "contacts": [
+      "renita m terry",
+      "higlario reyes",
+      "bailey lockhart",
+      "jasmond moore",
+      "nakiya wright-hughes",
+      "christiana taylor",
+      "deborah cookenour",
+      "cory mosson",
+      "darlene stone",
+      "thomas kruse",
+      "melissa litmer",
+      "michael wilson",
+      "olsen lindor",
+      "jimmy flake",
+      "jorge santamaria",
+      "dana barrett",
+      "jhonatan a ruiz",
+      "dominic tyler",
+      "anna ohaver",
+      "naomi sanchez",
+      "michael hinkle",
+      "jake smith",
+      "hector fraide",
+      "brandon hayes",
+      "james underwood",
+      "aditya kumar",
+      "aahron revell",
+      "emilio cezareo",
+      "david grider",
+      "lori mcdivitt",
+      "joseph bauerle",
+      "jacqueline houston",
+      "montee harris",
+      "conor conway",
+      "arthur rascoe",
+      "onyx e lorient",
+      "nancy powers",
+      "jose castillo",
+      "evelyn goliday",
+      "carolyn carman"
+    ]
+  },
+  {
+    "county": "Maricopa County",
+    "state": "AZ",
+    "state_full": "Arizona",
+    "count": 21,
+    "contacts": [
+      "ambrose kii",
+      "annier perez",
+      "daniel gaxiola",
+      "andreas janfruchte",
+      "larry consuelo wolverton",
+      "francisco lopez",
+      "joan ratcliffgtuierrez",
+      "gerald henly",
+      "moises olivan",
+      "josefina sotelo",
+      "danny salgado",
+      "ginny garcia",
+      "susan fuller",
+      "walter a ibarra",
+      "jessica sanchez",
+      "ruben romero",
+      "mary l daley",
+      "brian reece",
+      "michael chavez",
+      "michael renteria",
+      "james vargas"
+    ]
+  },
+  {
+    "county": "Allen County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 11,
+    "contacts": [
+      "jerry r morgan",
+      "wyman collins",
+      "sameckia freeman",
+      "josiah c riley",
+      "carrie langston",
+      "james wiegerink",
+      "casey evard",
+      "fransua fakherddin",
+      "bruce stiles",
+      "belen urbina",
+      "codie liefeld"
+    ]
+  },
+  {
+    "county": "Lake County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 10,
+    "contacts": [
+      "michael myers",
+      "dehonne green",
+      "jonathan porter",
+      "thomas steen",
+      "louise neese",
+      "marcella sams",
+      "gloria bernal",
+      "antonio azcona",
+      "linda shield prater",
+      "angel pavey"
+    ]
+  },
+  {
+    "county": "Summit County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 9,
+    "contacts": [
+      "darryl wilson",
+      "shawnte skinner",
+      "cynthia reddick",
+      "bradley foster",
+      "cory watt",
+      "joseph key",
+      "dann ganzhorn",
+      "haylie jones",
+      "kortnee weber"
+    ]
+  },
+  {
+    "county": "Franklin County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 9,
+    "contacts": [
+      "michael gardner",
+      "willy cadet",
+      "houleymatou ly",
+      "alexander barrios",
+      "mamadou ly",
+      "roberto rodriguez",
+      "dana lobza",
+      "benny pierce",
+      "barbara king"
+    ]
+  },
+  {
+    "county": "Mohave County",
+    "state": "AZ",
+    "state_full": "Arizona",
+    "count": 9,
+    "contacts": [
+      "jody sanchez",
+      "martin vaughan",
+      "paul bill",
+      "mary jo miller",
+      "sven white",
+      "kent robbins",
+      "steven snyder",
+      "kaylene purcell",
+      "timothy obiedzenski"
+    ]
+  },
+  {
+    "county": "Pasco County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 7,
+    "contacts": [
+      "jamie imbriani",
+      "sven hack",
+      "sandra carson",
+      "melissa eck",
+      "daniel s duncan",
+      "jason sulisufay",
+      "rachel mccall"
+    ]
+  },
+  {
+    "county": "Cuyahoga County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 7,
+    "contacts": [
+      "ethan gonzalez",
+      "cornelius ingram",
+      "william watts",
+      "salem saah",
+      "angelica rivera",
+      "barbara palichleb",
+      "max muskal"
+    ]
+  },
+  {
+    "county": "Madison County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 7,
+    "contacts": [
+      "michael maddy",
+      "troy breese",
+      "angela mata",
+      "summer e neal",
+      "harrison burrell",
+      "jessie braxton",
+      "troy breese"
+    ]
+  },
+  {
+    "county": "Pinal County",
+    "state": "AZ",
+    "state_full": "Arizona",
+    "count": 7,
+    "contacts": [
+      "ted lowenthal",
+      "virginia c briggs",
+      "marsha k woodard",
+      "albert freeman",
+      "steven lloyd",
+      "christopher zurline",
+      "manuel perez"
+    ]
+  },
+  {
+    "county": "Saint Joseph County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 7,
+    "contacts": [
+      "connie postelli",
+      "jaide briggs",
+      "andrea marshall",
+      "seth moore",
+      "linda betzer",
+      "patrick wilson",
+      "solange rutagengwa"
+    ]
+  },
+  {
+    "county": "Elkhart County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 6,
+    "contacts": [
+      "jason ulin",
+      "brandon reyes",
+      "tracy harper",
+      "matthew jordan",
+      "joseph stimac",
+      "vernon yoder"
+    ]
+  },
+  {
+    "county": "Hamilton County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 6,
+    "contacts": [
+      "shant'a washington",
+      "james barnes",
+      "rufus temmis",
+      "susan willis",
+      "ryan browne",
+      "aleese willis"
+    ]
+  },
+  {
+    "county": "Jefferson County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 6,
+    "contacts": [
+      "carol willis",
+      "johnnie hill",
+      "william cole",
+      "kaye cole",
+      "suzanne smith",
+      "greg pullen"
+    ]
+  },
+  {
+    "county": "Vanderburgh County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 6,
+    "contacts": [
+      "francis voelker julie voelker",
+      "darryl craddock",
+      "anai martinez",
+      "randy bolin",
+      "matt heald",
+      "david e helfert jr"
+    ]
+  },
+  {
+    "county": "Newport News Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 5,
+    "contacts": [
+      "nathalie jean",
+      "karen watkins",
+      "ernest l hamlin",
+      "wilford byrd",
+      "james lambertson"
+    ]
+  },
+  {
+    "county": "Broward County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 5,
+    "contacts": [
+      "salinas sean",
+      "henrick hesselman",
+      "neale alexander",
+      "genoveva gonzalez",
+      "zametra taylor"
+    ]
+  },
+  {
+    "county": "Stark County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 5,
+    "contacts": [
+      "gary cress",
+      "fred degennaro",
+      "deanna fisk",
+      "marta hernandez",
+      "kevin fry"
+    ]
+  },
+  {
+    "county": "Wayne County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 5,
+    "contacts": [
+      "stephen t mcnabb",
+      "raquel shafeek",
+      "robert owens",
+      "amy day",
+      "brian hart"
+    ]
+  },
+  {
+    "county": "Mahoning County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 5,
+    "contacts": [
+      "darryle thompson",
+      "justin diehl",
+      "david s zindi",
+      "kimberly lorent",
+      "michelle miranda"
+    ]
+  },
+  {
+    "county": "Prince William County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 5,
+    "contacts": [
+      "ali ahmadi",
+      "donna deihl",
+      "fatoma bangura",
+      "paul hatch",
+      "marshall swanson"
+    ]
+  },
+  {
+    "county": "Wayne County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 5,
+    "contacts": [
+      "andrew iernea",
+      "celestine cole",
+      "james frisco",
+      "joesph ballard",
+      "india perry"
+    ]
+  },
+  {
+    "county": "Norfolk Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 5,
+    "contacts": [
+      "loretta davis",
+      "david thompson",
+      "ryan shotwell",
+      "fred vaughan",
+      "lynda ramsey"
+    ]
+  },
+  {
+    "county": "Bernalillo County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 5,
+    "contacts": [
+      "bond homerina",
+      "ruben reyes",
+      "maria payne",
+      "stephanie apodaca",
+      "rochelle j feichko"
+    ]
+  },
+  {
+    "county": "Richmond Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 5,
+    "contacts": [
+      "bobby martin",
+      "kevin l moore",
+      "louis d eboa",
+      "rachel scarnaty",
+      "myrtle wright"
+    ]
+  },
+  {
+    "county": "Virginia Beach Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 4,
+    "contacts": [
+      "shelley wright",
+      "sheila young",
+      "arnold stephens",
+      "vera ricks"
+    ]
+  },
+  {
+    "county": "Lorain County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 4,
+    "contacts": [
+      "dennie hembree",
+      "jennifer o'neal",
+      "carolyn valentine",
+      "shaquanda taylor"
+    ]
+  },
+  {
+    "county": "Loudoun County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 4,
+    "contacts": [
+      "lydie zabo",
+      "shirley komack",
+      "james e holdeman",
+      "michaela booker"
+    ]
+  },
+  {
+    "county": "Roanoke Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 4,
+    "contacts": [
+      "joe lambert",
+      "russell matney",
+      "gayle graham",
+      "steven m harrison"
+    ]
+  },
+  {
+    "county": "Suffolk Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 4,
+    "contacts": [
+      "quintin johnson",
+      "daniel young",
+      "see vang",
+      "maurice hines"
+    ]
+  },
+  {
+    "county": "Kosciusko County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 4,
+    "contacts": [
+      "brennen adams",
+      "james bowman",
+      "donald cosgrove",
+      "joseph adams"
+    ]
+  },
+  {
+    "county": "DeKalb County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 4,
+    "contacts": [
+      "william r thornton",
+      "jeremy miller",
+      "bryson w bethune",
+      "justin lacey"
+    ]
+  },
+  {
+    "county": "San Juan County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 4,
+    "contacts": [
+      "miguel a villegas",
+      "laura vickers",
+      "breanna wood",
+      "freddie l brooks"
+    ]
+  },
+  {
+    "county": "Yavapai County",
+    "state": "AZ",
+    "state_full": "Arizona",
+    "count": 4,
+    "contacts": [
+      "david mazepink",
+      "peter montoya",
+      "kyle lund",
+      "alfredo v villanueva"
+    ]
+  },
+  {
+    "county": "Warrick County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 4,
+    "contacts": [
+      "wayne neisz",
+      "teresa cummings",
+      "travis hatfield",
+      "aubry adkins"
+    ]
+  },
+  {
+    "county": "Cumberland County",
+    "state": "NJ",
+    "state_full": "New Jersey",
+    "count": 3,
+    "contacts": [
+      "charles mason",
+      "mary mason",
+      "cheryl d bryant"
+    ]
+  },
+  {
+    "county": "Clayton County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 3,
+    "contacts": [
+      "mary knight",
+      "janine hudson",
+      "martha brooks"
+    ]
+  },
+  {
+    "county": "Palm Beach County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 3,
+    "contacts": [
+      "jason price",
+      "robert ludwig",
+      "georgia gomes"
+    ]
+  },
+  {
+    "county": "Licking County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 3,
+    "contacts": [
+      "ayden stalnaker",
+      "colby stough",
+      "david dubord"
+    ]
+  },
+  {
+    "county": "DuPage County",
+    "state": "IL",
+    "state_full": "Illinois",
+    "count": 3,
+    "contacts": [
+      "camille deluhery",
+      "farha sultana",
+      "melvin allison"
+    ]
+  },
+  {
+    "county": "Fulton County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 3,
+    "contacts": [
+      "elias hendawi",
+      "hannan qureshi",
+      "victor imagoro"
+    ]
+  },
+  {
+    "county": "Henry County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 3,
+    "contacts": [
+      "ray haynes",
+      "darleen mcbride",
+      "linda fowler"
+    ]
+  },
+  {
+    "county": "Johnson County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 3,
+    "contacts": [
+      "ernest early",
+      "lora dodson",
+      "abraham church"
+    ]
+  },
+  {
+    "county": "Cobb County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 3,
+    "contacts": [
+      "mckenna wheeler",
+      "gwen hansen",
+      "denise curry"
+    ]
+  },
+  {
+    "county": "Roane County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 3,
+    "contacts": [
+      "steven klima",
+      "bob combs",
+      "martha moore"
+    ]
+  },
+  {
+    "county": "Tarrant County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 3,
+    "contacts": [
+      "kerry lennon",
+      "arlethia calton",
+      "donald franklin"
+    ]
+  },
+  {
+    "county": "Montgomery County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 3,
+    "contacts": [
+      "helen black",
+      "peggy mullins",
+      "sharletta fitzgerald"
+    ]
+  },
+  {
+    "county": "Knox County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 3,
+    "contacts": [
+      "richard brockman",
+      "mario vierarodriguez",
+      "roger tweed"
+    ]
+  },
+  {
+    "county": "Harris County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 3,
+    "contacts": [
+      "patricia carter",
+      "carline jones",
+      "ida h harmon"
+    ]
+  },
+  {
+    "county": "Brevard County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 3,
+    "contacts": [
+      "jan hardy",
+      "kristine davis",
+      "francois pelletier"
+    ]
+  },
+  {
+    "county": "Miami-Dade County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 3,
+    "contacts": [
+      "robert walker",
+      "laverne hilliard",
+      "mal"
+    ]
+  },
+  {
+    "county": "Madison County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 3,
+    "contacts": [
+      "lorenzo ford",
+      "neoasha z weeks",
+      "derek lehmann"
+    ]
+  },
+  {
+    "county": "Delaware County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 3,
+    "contacts": [
+      "kimberly murphy",
+      "kyle masiongale",
+      "michael willey"
+    ]
+  },
+  {
+    "county": "Otero County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 3,
+    "contacts": [
+      "darlene corona",
+      "kyle w phelps",
+      "raymon j debusk"
+    ]
+  },
+  {
+    "county": "Pima County",
+    "state": "AZ",
+    "state_full": "Arizona",
+    "count": 3,
+    "contacts": [
+      "robert webb",
+      "timothy christian",
+      "irene ward"
+    ]
+  },
+  {
+    "county": "Pittsylvania County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 3,
+    "contacts": [
+      "april hairston",
+      "donald t rose",
+      "alexander galvez"
+    ]
+  },
+  {
+    "county": "Cass County",
+    "state": "ND",
+    "state_full": "North Dakota",
+    "count": 3,
+    "contacts": [
+      "sarah herman",
+      "patrick hagen",
+      "david wright"
+    ]
+  },
+  {
+    "county": "Danville Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 3,
+    "contacts": [
+      "claree bethel",
+      "barry roberts",
+      "robert lucas"
+    ]
+  },
+  {
+    "county": "Hampton Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 3,
+    "contacts": [
+      "joshua jaszemski",
+      "luther harris",
+      "nathaniel velez"
+    ]
+  },
+  {
+    "county": "Campbell County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 3,
+    "contacts": [
+      "william moore",
+      "james cheatham",
+      "marshall carroll"
+    ]
+  },
+  {
+    "county": "Washington County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 3,
+    "contacts": [
+      "devan kilburn",
+      "libby smedley",
+      "george weaver"
+    ]
+  },
+  {
+    "county": "Grant County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 3,
+    "contacts": [
+      "keith myers",
+      "dean terrell",
+      "elijah hahn"
+    ]
+  },
+  {
+    "county": "Yuma County",
+    "state": "AZ",
+    "state_full": "Arizona",
+    "count": 3,
+    "contacts": [
+      "julio santiago",
+      "hannah wilkins",
+      "santiago garcia"
+    ]
+  },
+  {
+    "county": "King County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 3,
+    "contacts": [
+      "michelle delgado",
+      "joshua sakai",
+      "usha murthi"
+    ]
+  },
+  {
+    "county": "Butler County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 3,
+    "contacts": [
+      "nathan gilmore",
+      "latanyia jackson",
+      "kevin floss"
+    ]
+  },
+  {
+    "county": "Fredericksburg Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 3,
+    "contacts": [
+      "susan d james",
+      "charles s gibson",
+      "kudirat adebanjo"
+    ]
+  },
+  {
+    "county": "Floyd County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 3,
+    "contacts": [
+      "dawn wills",
+      "christopher chancey",
+      "reginald riley"
+    ]
+  },
+  {
+    "county": "Marshall County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 3,
+    "contacts": [
+      "john deforge",
+      "timothy lee",
+      "paul miller"
+    ]
+  },
+  {
+    "county": "Greene County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 2,
+    "contacts": [
+      "russell d shonkwiler",
+      "adelina rojas"
+    ]
+  },
+  {
+    "county": "DeSoto County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 2,
+    "contacts": [
+      "alton glover",
+      "glenda frazier"
+    ]
+  },
+  {
+    "county": "Shelby County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 2,
+    "contacts": [
+      "stuart schablow",
+      "glenn dixon"
+    ]
+  },
+  {
+    "county": "Rockdale County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 2,
+    "contacts": [
+      "brenda jordan",
+      "donald estes"
+    ]
+  },
+  {
+    "county": "Toombs County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 2,
+    "contacts": [
+      "norman slaughter",
+      "dawn cauley"
+    ]
+  },
+  {
+    "county": "Stafford County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 2,
+    "contacts": [
+      "terrance mintah",
+      "john bozzell"
+    ]
+  },
+  {
+    "county": "Ross County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 2,
+    "contacts": [
+      "scott brandon",
+      "randy lutz"
+    ]
+  },
+  {
+    "county": "Cook County",
+    "state": "IL",
+    "state_full": "Illinois",
+    "count": 2,
+    "contacts": [
+      "labrila peavy",
+      "xavier mejia"
+    ]
+  },
+  {
+    "county": "Richmond County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 2,
+    "contacts": [
+      "bernice scales",
+      "jerry whigham"
+    ]
+  },
+  {
+    "county": "Montgomery County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 2,
+    "contacts": [
+      "william evans",
+      "sherrelle caudill"
+    ]
+  },
+  {
+    "county": "Fairfield County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 2,
+    "contacts": [
+      "cynthia petersen",
+      "aaron knight"
+    ]
+  },
+  {
+    "county": "Ashtabula County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 2,
+    "contacts": [
+      "julie hazeltine",
+      "jeremy hodgkinson"
+    ]
+  },
+  {
+    "county": "Tippecanoe County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 2,
+    "contacts": [
+      "amber ramirez",
+      "berna silva"
+    ]
+  },
+  {
+    "county": "Morgan County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 2,
+    "contacts": [
+      "frederick wilder",
+      "david ferris"
+    ]
+  },
+  {
+    "county": "Howard County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 2,
+    "contacts": [
+      "teresa clark",
+      "landon grimm"
+    ]
+  },
+  {
+    "county": "Muscogee County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 2,
+    "contacts": [
+      "gwendolyn nelson",
+      "alexander lewis"
+    ]
+  },
+  {
+    "county": "Douglas County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 2,
+    "contacts": [
+      "derek bordeaux",
+      "brandon hadley"
+    ]
+  },
+  {
+    "county": "Henrico County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 2,
+    "contacts": [
+      "alejandro madera",
+      "bernard howie"
+    ]
+  },
+  {
+    "county": "Houston County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 2,
+    "contacts": [
+      "lajoyce clowers",
+      "michael neloms"
+    ]
+  },
+  {
+    "county": "Hamilton County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 2,
+    "contacts": [
+      "mark woloshin",
+      "barbara baker"
+    ]
+  },
+  {
+    "county": "Wabash County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 2,
+    "contacts": [
+      "justin snyder",
+      "aimee gusmano"
+    ]
+  },
+  {
+    "county": "Hinds County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 2,
+    "contacts": [
+      "deangelo henderson",
+      "vivian rollins"
+    ]
+  },
+  {
+    "county": "Callahan County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 2,
+    "contacts": [
+      "robert strickland",
+      "venneshia strickland"
+    ]
+  },
+  {
+    "county": "Orange County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 2,
+    "contacts": [
+      "theresa smith",
+      "michael meyer"
+    ]
+  },
+  {
+    "county": "Dallas County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 2,
+    "contacts": [
+      "durenda parnacher",
+      "joyce whitaker"
+    ]
+  },
+  {
+    "county": "Kershaw County",
+    "state": "SC",
+    "state_full": "South Carolina",
+    "count": 2,
+    "contacts": [
+      "debra mc millan",
+      "tom wilson"
+    ]
+  },
+  {
+    "county": "Shelby County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 2,
+    "contacts": [
+      "betty brown",
+      "valencia green"
+    ]
+  },
+  {
+    "county": "Duval County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 2,
+    "contacts": [
+      "rita coburn",
+      "linda mccostlin"
+    ]
+  },
+  {
+    "county": "Polk County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 2,
+    "contacts": [
+      "william coblentz",
+      "vera nicholson"
+    ]
+  },
+  {
+    "county": "Bexar County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 2,
+    "contacts": [
+      "melita cullinan",
+      "susan watson"
+    ]
+  },
+  {
+    "county": "Cameron County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 2,
+    "contacts": [
+      "edmundo monroy",
+      "marvin ortiz"
+    ]
+  },
+  {
+    "county": "Russell County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 2,
+    "contacts": [
+      "lorie catrett",
+      "terrie parvin"
+    ]
+  },
+  {
+    "county": "Rutherford County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 2,
+    "contacts": [
+      "annette odems",
+      "christy thomas"
+    ]
+  },
+  {
+    "county": "Morgan County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 2,
+    "contacts": [
+      "hattie selby",
+      "audary blaxton"
+    ]
+  },
+  {
+    "county": "Escambia County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 2,
+    "contacts": [
+      "eugene brown",
+      "jahnese bigham"
+    ]
+  },
+  {
+    "county": "Baldwin County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 2,
+    "contacts": [
+      "delores brown",
+      "kenneth bailey"
+    ]
+  },
+  {
+    "county": "Pontotoc County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 2,
+    "contacts": [
+      "willie l foote",
+      "james ball 09 28 1951"
+    ]
+  },
+  {
+    "county": "Mobile County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 2,
+    "contacts": [
+      "joan s tant",
+      "cedric d lang"
+    ]
+  },
+  {
+    "county": "Greenville County",
+    "state": "SC",
+    "state_full": "South Carolina",
+    "count": 2,
+    "contacts": [
+      "sly henderson",
+      "robert e smiley"
+    ]
+  },
+  {
+    "county": "Mercer County",
+    "state": "NJ",
+    "state_full": "New Jersey",
+    "count": 2,
+    "contacts": [
+      "raheen wilson",
+      "cristhian farrell"
+    ]
+  },
+  {
+    "county": "Snohomish County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 2,
+    "contacts": [
+      "gloria kalombo",
+      "tristin larsen"
+    ]
+  },
+  {
+    "county": "Saint Johns County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 2,
+    "contacts": [
+      "joann slusarczyk",
+      "brian bootay"
+    ]
+  },
+  {
+    "county": "Clay County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 2,
+    "contacts": [
+      "sandra pecor",
+      "lana howze"
+    ]
+  },
+  {
+    "county": "Forrest County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 2,
+    "contacts": [
+      "scott a varnado",
+      "helen c clark"
+    ]
+  },
+  {
+    "county": "Santa Cruz County",
+    "state": "AZ",
+    "state_full": "Arizona",
+    "count": 2,
+    "contacts": [
+      "jorge solis",
+      "jose morales"
+    ]
+  },
+  {
+    "county": "Knox County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 2,
+    "contacts": [
+      "james clifford",
+      "timothy holt"
+    ]
+  },
+  {
+    "county": "Citrus County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 2,
+    "contacts": [
+      "douglas scott",
+      "crispulo quigtar"
+    ]
+  },
+  {
+    "county": "Hendricks County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 2,
+    "contacts": [
+      "ryland blair",
+      "michael kornegay"
+    ]
+  },
+  {
+    "county": "Porter County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 2,
+    "contacts": [
+      "william brubaker",
+      "laura conyers"
+    ]
+  },
+  {
+    "county": "Santa Fe County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 2,
+    "contacts": [
+      "leroy walker",
+      "jacob oney"
+    ]
+  },
+  {
+    "county": "Eddy County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 2,
+    "contacts": [
+      "joe esquibel",
+      "beau burgess"
+    ]
+  },
+  {
+    "county": "Charlotte County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 2,
+    "contacts": [
+      "larry hughes",
+      "mary boyd"
+    ]
+  },
+  {
+    "county": "Chaves County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 2,
+    "contacts": [
+      "anthony candelaria",
+      "heather mccloud"
+    ]
+  },
+  {
+    "county": "Curry County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 2,
+    "contacts": [
+      "ricardo bustamante",
+      "larry mccormack"
+    ]
+  },
+  {
+    "county": "Sargent County",
+    "state": "ND",
+    "state_full": "North Dakota",
+    "count": 2,
+    "contacts": [
+      "jessica dux",
+      "jerel dux"
+    ]
+  },
+  {
+    "county": "Cochise County",
+    "state": "AZ",
+    "state_full": "Arizona",
+    "count": 2,
+    "contacts": [
+      "amanda horrocks",
+      "brandon amerson"
+    ]
+  },
+  {
+    "county": "Valencia County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 2,
+    "contacts": [
+      "wilmer naranjo",
+      "macario ramirez"
+    ]
+  },
+  {
+    "county": "Chesapeake Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 2,
+    "contacts": [
+      "jason godbey",
+      "ariele campbell"
+    ]
+  },
+  {
+    "county": "Laurens County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 2,
+    "contacts": [
+      "tomqavious hudson",
+      "nathaniel isaac"
+    ]
+  },
+  {
+    "county": "Sussex County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 2,
+    "contacts": [
+      "lawrence williams",
+      "deborah barnette"
+    ]
+  },
+  {
+    "county": "Oakland County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 2,
+    "contacts": [
+      "bradley keiser",
+      "ramona hofmeister"
+    ]
+  },
+  {
+    "county": "Manassas Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 2,
+    "contacts": [
+      "laurina williams",
+      "will palmer"
+    ]
+  },
+  {
+    "county": "Boone County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 2,
+    "contacts": [
+      "william miller",
+      "carol crone"
+    ]
+  },
+  {
+    "county": "Benton County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 2,
+    "contacts": [
+      "nicolle suarez",
+      "dylan phillips"
+    ]
+  },
+  {
+    "county": "Ocean County",
+    "state": "NJ",
+    "state_full": "New Jersey",
+    "count": 2,
+    "contacts": [
+      "kimberly reilly",
+      "burman nelson"
+    ]
+  },
+  {
+    "county": "Boone County",
+    "state": "MO",
+    "state_full": "Missouri",
+    "count": 2,
+    "contacts": [
+      "gedir escalante",
+      "sabrina perkins"
+    ]
+  },
+  {
+    "county": "Jackson County",
+    "state": "MO",
+    "state_full": "Missouri",
+    "count": 2,
+    "contacts": [
+      "bernard j meyer",
+      "noe robles"
+    ]
+  },
+  {
+    "county": "Baldwin County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 2,
+    "contacts": [
+      "travis coker",
+      "philip franklin"
+    ]
+  },
+  {
+    "county": "Middlesex County",
+    "state": "NJ",
+    "state_full": "New Jersey",
+    "count": 2,
+    "contacts": [
+      "aimee manipis",
+      "sherryl reid"
+    ]
+  },
+  {
+    "county": "Essex County",
+    "state": "NJ",
+    "state_full": "New Jersey",
+    "count": 2,
+    "contacts": [
+      "dennis yermoshin",
+      "garry merrill"
+    ]
+  },
+  {
+    "county": "Effingham County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 2,
+    "contacts": [
+      "michael smith",
+      "leon rawls"
+    ]
+  },
+  {
+    "county": "Lynchburg Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 2,
+    "contacts": [
+      "michael battaglia",
+      "denise ditto"
+    ]
+  },
+  {
+    "county": "Hancock County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 2,
+    "contacts": [
+      "susan pollock",
+      "linda owens"
+    ]
+  },
+  {
+    "county": "Portsmouth Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 2,
+    "contacts": [
+      "darryl johnson",
+      "johnathan benson"
+    ]
+  },
+  {
+    "county": "Jefferson County",
+    "state": "KY",
+    "state_full": "Kentucky",
+    "count": 2,
+    "contacts": [
+      "tiran jackson",
+      "robert farris"
+    ]
+  },
+  {
+    "county": "Randolph County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "russell hays"
+    ]
+  },
+  {
+    "county": "Marion County",
+    "state": "IA",
+    "state_full": "Iowa",
+    "count": 1,
+    "contacts": [
+      "henry kephart"
+    ]
+  },
+  {
+    "county": "Hamblen County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "richard thomas"
+    ]
+  },
+  {
+    "county": "Clark County",
+    "state": "WI",
+    "state_full": "Wisconsin",
+    "count": 1,
+    "contacts": [
+      "olivia schreiner"
+    ]
+  },
+  {
+    "county": "Milwaukee County",
+    "state": "WI",
+    "state_full": "Wisconsin",
+    "count": 1,
+    "contacts": [
+      "althea matlock"
+    ]
+  },
+  {
+    "county": "Black Hawk County",
+    "state": "IA",
+    "state_full": "Iowa",
+    "count": 1,
+    "contacts": [
+      "darwin poyner"
+    ]
+  },
+  {
+    "county": "Lee County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "kassie begley"
+    ]
+  },
+  {
+    "county": "Lake County",
+    "state": "IL",
+    "state_full": "Illinois",
+    "count": 1,
+    "contacts": [
+      "vanessa herron"
+    ]
+  },
+  {
+    "county": "McHenry County",
+    "state": "IL",
+    "state_full": "Illinois",
+    "count": 1,
+    "contacts": [
+      "albert parcero"
+    ]
+  },
+  {
+    "county": "Coweta County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "jenny reed"
+    ]
+  },
+  {
+    "county": "Lucas County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "michael garcia-mominee"
+    ]
+  },
+  {
+    "county": "Upson County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "elaine adams"
+    ]
+  },
+  {
+    "county": "Hancock County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "mark whittaker"
+    ]
+  },
+  {
+    "county": "Coles County",
+    "state": "IL",
+    "state_full": "Illinois",
+    "count": 1,
+    "contacts": [
+      "harold e burton"
+    ]
+  },
+  {
+    "county": "Kendall County",
+    "state": "IL",
+    "state_full": "Illinois",
+    "count": 1,
+    "contacts": [
+      "noah confiliano"
+    ]
+  },
+  {
+    "county": "Macoupin County",
+    "state": "IL",
+    "state_full": "Illinois",
+    "count": 1,
+    "contacts": [
+      "colleen burroughs"
+    ]
+  },
+  {
+    "county": "Chatham County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "andrew hicks"
+    ]
+  },
+  {
+    "county": "Forsyth County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "theresa coenen"
+    ]
+  },
+  {
+    "county": "Hidalgo County",
+    "state": "LA",
+    "state_full": "Louisiana",
+    "count": 1,
+    "contacts": [
+      "christina manuel"
+    ]
+  },
+  {
+    "county": "Mecklenburg County",
+    "state": "NC",
+    "state_full": "North Carolina",
+    "count": 1,
+    "contacts": [
+      "logan brack"
+    ]
+  },
+  {
+    "county": "Shelby County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "james fricke"
+    ]
+  },
+  {
+    "county": "Jackson County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "kennedi reffitt"
+    ]
+  },
+  {
+    "county": "Monroe County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "elsa acevedoecheverria"
+    ]
+  },
+  {
+    "county": "Pickaway County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "alan cabral"
+    ]
+  },
+  {
+    "county": "Fountain County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "roger beedle"
+    ]
+  },
+  {
+    "county": "Gwinnett County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "jose berrayarza"
+    ]
+  },
+  {
+    "county": "Williams County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "glenn walker"
+    ]
+  },
+  {
+    "county": "Carroll County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "terrence roy"
+    ]
+  },
+  {
+    "county": "Newton County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "joe franklin"
+    ]
+  },
+  {
+    "county": "Manassas Park Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "edward slaughter"
+    ]
+  },
+  {
+    "county": "Portage County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "timothy blair"
+    ]
+  },
+  {
+    "county": "Huron County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "roberto espinoza"
+    ]
+  },
+  {
+    "county": "Lake County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "brian nolan"
+    ]
+  },
+  {
+    "county": "Peach County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "chastity warren"
+    ]
+  },
+  {
+    "county": "Sandusky County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "camiren mancini"
+    ]
+  },
+  {
+    "county": "Shenandoah County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "celia chavez"
+    ]
+  },
+  {
+    "county": "Chesterfield County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "gary chapple"
+    ]
+  },
+  {
+    "county": "Van Wert County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "gary pugsley"
+    ]
+  },
+  {
+    "county": "Whitfield County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "carmen torres"
+    ]
+  },
+  {
+    "county": "Blackford County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "lori perry"
+    ]
+  },
+  {
+    "county": "Crawford County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "clarence harris"
+    ]
+  },
+  {
+    "county": "Monroe County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "ruby cooper"
+    ]
+  },
+  {
+    "county": "Madison County",
+    "state": "KY",
+    "state_full": "Kentucky",
+    "count": 1,
+    "contacts": [
+      "thomas moore"
+    ]
+  },
+  {
+    "county": "Dillon County",
+    "state": "SC",
+    "state_full": "South Carolina",
+    "count": 1,
+    "contacts": [
+      "bernice mc neil"
+    ]
+  },
+  {
+    "county": "Sumner County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "david wallace"
+    ]
+  },
+  {
+    "county": "Talladega County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "tammy haynes"
+    ]
+  },
+  {
+    "county": "Johnson County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "eve grayson"
+    ]
+  },
+  {
+    "county": "Oktibbeha County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "annie criner"
+    ]
+  },
+  {
+    "county": "Yalobusha County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "pamela rogers"
+    ]
+  },
+  {
+    "county": "Jackson County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 1,
+    "contacts": [
+      "annette hogrefe"
+    ]
+  },
+  {
+    "county": "Polk County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "tammy lewis"
+    ]
+  },
+  {
+    "county": "Roscommon County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 1,
+    "contacts": [
+      "edward godfrey"
+    ]
+  },
+  {
+    "county": "Choctaw County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "elaine pruitt"
+    ]
+  },
+  {
+    "county": "Pacific County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 1,
+    "contacts": [
+      "bob taylor ii"
+    ]
+  },
+  {
+    "county": "Clark County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "elwood smith"
+    ]
+  },
+  {
+    "county": "Austin County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 1,
+    "contacts": [
+      "dolores fore"
+    ]
+  },
+  {
+    "county": "Morgan County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "allen branstetter"
+    ]
+  },
+  {
+    "county": "Eastland County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 1,
+    "contacts": [
+      "tommy hutto paula mills"
+    ]
+  },
+  {
+    "county": "Thurston County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 1,
+    "contacts": [
+      "julie thomas"
+    ]
+  },
+  {
+    "county": "McMinn County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "herb stevens"
+    ]
+  },
+  {
+    "county": "Hendry County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "harry kellogg"
+    ]
+  },
+  {
+    "county": "Jackson County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "rose vail"
+    ]
+  },
+  {
+    "county": "Sierra County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 1,
+    "contacts": [
+      "mary a tow"
+    ]
+  },
+  {
+    "county": "DeKalb County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "linda davis"
+    ]
+  },
+  {
+    "county": "Radford Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "bruce moseman"
+    ]
+  },
+  {
+    "county": "Columbiana County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "emmet eason"
+    ]
+  },
+  {
+    "county": "Gratiot County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 1,
+    "contacts": [
+      "bryan macdonald"
+    ]
+  },
+  {
+    "county": "Cibola County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 1,
+    "contacts": [
+      "margaret benham"
+    ]
+  },
+  {
+    "county": "Lincoln County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "glen theriault"
+    ]
+  },
+  {
+    "county": "Hardin County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "david deshazier"
+    ]
+  },
+  {
+    "county": "Coffee County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "tim chenoweth"
+    ]
+  },
+  {
+    "county": "Grant County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 1,
+    "contacts": [
+      "sue oakley"
+    ]
+  },
+  {
+    "county": "Lancaster County",
+    "state": "SC",
+    "state_full": "South Carolina",
+    "count": 1,
+    "contacts": [
+      "simon harris"
+    ]
+  },
+  {
+    "county": "Brazos County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 1,
+    "contacts": [
+      "latreace davis"
+    ]
+  },
+  {
+    "county": "Lee County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "gayla sanders"
+    ]
+  },
+  {
+    "county": "Webster County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "kathy santana"
+    ]
+  },
+  {
+    "county": "Gibson County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "nelda s c"
+    ]
+  },
+  {
+    "county": "Travis County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 1,
+    "contacts": [
+      "deborah patin"
+    ]
+  },
+  {
+    "county": "Jefferson County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 1,
+    "contacts": [
+      "terry brown"
+    ]
+  },
+  {
+    "county": "Oconee County",
+    "state": "SC",
+    "state_full": "South Carolina",
+    "count": 1,
+    "contacts": [
+      "cheryl neal"
+    ]
+  },
+  {
+    "county": "Tate County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "marquise f ward"
+    ]
+  },
+  {
+    "county": "Scott County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "tonja smithburks"
+    ]
+  },
+  {
+    "county": "Waller County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 1,
+    "contacts": [
+      "tracy owen"
+    ]
+  },
+  {
+    "county": "Marengo County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "ramona g snipes"
+    ]
+  },
+  {
+    "county": "Rankin County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "mitchell sojourner"
+    ]
+  },
+  {
+    "county": "Tuscaloosa County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "mary quinn crump"
+    ]
+  },
+  {
+    "county": "Leon County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 1,
+    "contacts": [
+      "michael tryon"
+    ]
+  },
+  {
+    "county": "Leake County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "kimberly schalaine reid"
+    ]
+  },
+  {
+    "county": "Harrison County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "kathleen lee"
+    ]
+  },
+  {
+    "county": "Brunswick County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "evelyn a alexander"
+    ]
+  },
+  {
+    "county": "Walker County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "roger d boyd"
+    ]
+  },
+  {
+    "county": "Asotin County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 1,
+    "contacts": [
+      "ann marie floch"
+    ]
+  },
+  {
+    "county": "Winston County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "paul brantley jr"
+    ]
+  },
+  {
+    "county": "Escambia County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "lillie church"
+    ]
+  },
+  {
+    "county": "Winston County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "kodey johnson"
+    ]
+  },
+  {
+    "county": "Franklin County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "prince jones"
+    ]
+  },
+  {
+    "county": "Lamar County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "keysia reid"
+    ]
+  },
+  {
+    "county": "Elmore County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "jacqueline d slaton"
+    ]
+  },
+  {
+    "county": "Lee County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "karen hill"
+    ]
+  },
+  {
+    "county": "Copiah County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "tavious mcdaniel"
+    ]
+  },
+  {
+    "county": "Madison County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 1,
+    "contacts": [
+      "eric ivey"
+    ]
+  },
+  {
+    "county": "Marshall County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "steven r bannister"
+    ]
+  },
+  {
+    "county": "Davidson County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "judy brown"
+    ]
+  },
+  {
+    "county": "Marion County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "janice d capra"
+    ]
+  },
+  {
+    "county": "Osceola County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "rodger stultz"
+    ]
+  },
+  {
+    "county": "Hardin County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 1,
+    "contacts": [
+      "william sheppard"
+    ]
+  },
+  {
+    "county": "Dallas County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "kenneth wilmer"
+    ]
+  },
+  {
+    "county": "Cherokee County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "marcia thompson"
+    ]
+  },
+  {
+    "county": "Dorchester County",
+    "state": "SC",
+    "state_full": "South Carolina",
+    "count": 1,
+    "contacts": [
+      "jacqueline elmore"
+    ]
+  },
+  {
+    "county": "Franklin County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "johnathan pace"
+    ]
+  },
+  {
+    "county": "Pearl River County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "marvin foster"
+    ]
+  },
+  {
+    "county": "Weakley County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "travis platt"
+    ]
+  },
+  {
+    "county": "Colorado County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 1,
+    "contacts": [
+      "joe l huff"
+    ]
+  },
+  {
+    "county": "Wells County",
+    "state": "ND",
+    "state_full": "North Dakota",
+    "count": 1,
+    "contacts": [
+      "carrie varner"
+    ]
+  },
+  {
+    "county": "Huntington County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "joy beck"
+    ]
+  },
+  {
+    "county": "Coconino County",
+    "state": "AZ",
+    "state_full": "Arizona",
+    "count": 1,
+    "contacts": [
+      "lisa annear"
+    ]
+  },
+  {
+    "county": "Steuben County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "dan foster jr"
+    ]
+  },
+  {
+    "county": "Lincoln County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 1,
+    "contacts": [
+      "nick nanz"
+    ]
+  },
+  {
+    "county": "Dickenson County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "jeffrey bowen"
+    ]
+  },
+  {
+    "county": "Hamilton County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "renee holland"
+    ]
+  },
+  {
+    "county": "Allen County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "diane bell"
+    ]
+  },
+  {
+    "county": "Ottawa County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 1,
+    "contacts": [
+      "mark chittenden"
+    ]
+  },
+  {
+    "county": "Clark County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 1,
+    "contacts": [
+      "ashley rodriguez alvarez"
+    ]
+  },
+  {
+    "county": "Mason County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 1,
+    "contacts": [
+      "kenneth morrison"
+    ]
+  },
+  {
+    "county": "Putnam County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "anthony thompson"
+    ]
+  },
+  {
+    "county": "Hillsdale County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 1,
+    "contacts": [
+      "george brown"
+    ]
+  },
+  {
+    "county": "Saint Clair County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 1,
+    "contacts": [
+      "philip jaeger"
+    ]
+  },
+  {
+    "county": "Sumter County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "maria raniolo"
+    ]
+  },
+  {
+    "county": "Bradford County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "ronald thomas"
+    ]
+  },
+  {
+    "county": "Whitley County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "june geiger"
+    ]
+  },
+  {
+    "county": "Williams County",
+    "state": "ND",
+    "state_full": "North Dakota",
+    "count": 1,
+    "contacts": [
+      "david crain"
+    ]
+  },
+  {
+    "county": "McKinley County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 1,
+    "contacts": [
+      "nancy mahkee"
+    ]
+  },
+  {
+    "county": "Bergen County",
+    "state": "NJ",
+    "state_full": "New Jersey",
+    "count": 1,
+    "contacts": [
+      "luis t pimentel"
+    ]
+  },
+  {
+    "county": "Sullivan County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "daniel v walters ii"
+    ]
+  },
+  {
+    "county": "Callaway County",
+    "state": "MO",
+    "state_full": "Missouri",
+    "count": 1,
+    "contacts": [
+      "florence johnson"
+    ]
+  },
+  {
+    "county": "Nassau County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "alton gordon"
+    ]
+  },
+  {
+    "county": "Morton County",
+    "state": "ND",
+    "state_full": "North Dakota",
+    "count": 1,
+    "contacts": [
+      "david e knudson"
+    ]
+  },
+  {
+    "county": "Doña Ana County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 1,
+    "contacts": [
+      "corine yvette ruiz"
+    ]
+  },
+  {
+    "county": "Richmond County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "gerardo flores"
+    ]
+  },
+  {
+    "county": "Quay County",
+    "state": "NM",
+    "state_full": "New Mexico",
+    "count": 1,
+    "contacts": [
+      "steven carmona"
+    ]
+  },
+  {
+    "county": "Houston County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "tommy oliver"
+    ]
+  },
+  {
+    "county": "Suwannee County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "james lott"
+    ]
+  },
+  {
+    "county": "Arapahoe County",
+    "state": "CO",
+    "state_full": "Colorado",
+    "count": 1,
+    "contacts": [
+      "rachael cody"
+    ]
+  },
+  {
+    "county": "Alachua County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "jameson johnson"
+    ]
+  },
+  {
+    "county": "McLennan County",
+    "state": "TX",
+    "state_full": "Texas",
+    "count": 1,
+    "contacts": [
+      "debra f baker"
+    ]
+  },
+  {
+    "county": "York County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "marcos u castro palma"
+    ]
+  },
+  {
+    "county": "Hillsborough County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "deriyun mcgee"
+    ]
+  },
+  {
+    "county": "Steele County",
+    "state": "MN",
+    "state_full": "Minnesota",
+    "count": 1,
+    "contacts": [
+      "deborah j deweese"
+    ]
+  },
+  {
+    "county": "Burleigh County",
+    "state": "ND",
+    "state_full": "North Dakota",
+    "count": 1,
+    "contacts": [
+      "colleen j funk"
+    ]
+  },
+  {
+    "county": "Barnes County",
+    "state": "ND",
+    "state_full": "North Dakota",
+    "count": 1,
+    "contacts": [
+      "selina j brown"
+    ]
+  },
+  {
+    "county": "Grayson County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "james blevins"
+    ]
+  },
+  {
+    "county": "Yakima County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 1,
+    "contacts": [
+      "william ritson"
+    ]
+  },
+  {
+    "county": "Barry County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 1,
+    "contacts": [
+      "fred spears"
+    ]
+  },
+  {
+    "county": "Marion County",
+    "state": "MO",
+    "state_full": "Missouri",
+    "count": 1,
+    "contacts": [
+      "sean carroll"
+    ]
+  },
+  {
+    "county": "Kitsap County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 1,
+    "contacts": [
+      "juan hernandez"
+    ]
+  },
+  {
+    "county": "Macomb County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 1,
+    "contacts": [
+      "luke j rybinski"
+    ]
+  },
+  {
+    "county": "Texas County",
+    "state": "MO",
+    "state_full": "Missouri",
+    "count": 1,
+    "contacts": [
+      "dakota schwenk"
+    ]
+  },
+  {
+    "county": "Madison County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "patricia cz"
+    ]
+  },
+  {
+    "county": "Monmouth County",
+    "state": "NJ",
+    "state_full": "New Jersey",
+    "count": 1,
+    "contacts": [
+      "laurette sanfier"
+    ]
+  },
+  {
+    "county": "Grays Harbor County",
+    "state": "WA",
+    "state_full": "Washington",
+    "count": 1,
+    "contacts": [
+      "paul chestney"
+    ]
+  },
+  {
+    "county": "Cheatham County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "linda hornyak"
+    ]
+  },
+  {
+    "county": "Blount County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "joel s stoutt"
+    ]
+  },
+  {
+    "county": "Levy County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "cynthia meeks"
+    ]
+  },
+  {
+    "county": "Barry County",
+    "state": "MO",
+    "state_full": "Missouri",
+    "count": 1,
+    "contacts": [
+      "lena reed"
+    ]
+  },
+  {
+    "county": "DeSoto County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "allen reesor"
+    ]
+  },
+  {
+    "county": "Navajo County",
+    "state": "AZ",
+    "state_full": "Arizona",
+    "count": 1,
+    "contacts": [
+      "gale johnson"
+    ]
+  },
+  {
+    "county": "LaPorte County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "laura cooney"
+    ]
+  },
+  {
+    "county": "Door County",
+    "state": "WI",
+    "state_full": "Wisconsin",
+    "count": 1,
+    "contacts": [
+      "randy schultz"
+    ]
+  },
+  {
+    "county": "Pinellas County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "ronald ward"
+    ]
+  },
+  {
+    "county": "Nodaway County",
+    "state": "MO",
+    "state_full": "Missouri",
+    "count": 1,
+    "contacts": [
+      "john kroeger"
+    ]
+  },
+  {
+    "county": "Clarke County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "etta wagner"
+    ]
+  },
+  {
+    "county": "Laclede County",
+    "state": "MO",
+    "state_full": "Missouri",
+    "count": 1,
+    "contacts": [
+      "mark a heisz"
+    ]
+  },
+  {
+    "county": "Staunton Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "delores hastings"
+    ]
+  },
+  {
+    "county": "Paulding County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "donna sallee"
+    ]
+  },
+  {
+    "county": "Richland County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "kurtis baker"
+    ]
+  },
+  {
+    "county": "Marion County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "isaac shockey"
+    ]
+  },
+  {
+    "county": "Leon County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "roberto torres"
+    ]
+  },
+  {
+    "county": "Montgomery County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "christopher sherrill"
+    ]
+  },
+  {
+    "county": "Polk County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "jordan jones"
+    ]
+  },
+  {
+    "county": "DeKalb County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "yemeserach gebreyes"
+    ]
+  },
+  {
+    "county": "Posey County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "lawrence tully"
+    ]
+  },
+  {
+    "county": "Payette County",
+    "state": "ID",
+    "state_full": "Idaho",
+    "count": 1,
+    "contacts": [
+      "john mena"
+    ]
+  },
+  {
+    "county": "Stark County",
+    "state": "ND",
+    "state_full": "North Dakota",
+    "count": 1,
+    "contacts": [
+      "tristan j dworshak"
+    ]
+  },
+  {
+    "county": "Franklin County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "trevva lunsford"
+    ]
+  },
+  {
+    "county": "Tippah County",
+    "state": "MS",
+    "state_full": "Mississippi",
+    "count": 1,
+    "contacts": [
+      "jeanelle bogard"
+    ]
+  },
+  {
+    "county": "Calhoun County",
+    "state": "AL",
+    "state_full": "Alabama",
+    "count": 1,
+    "contacts": [
+      "patricia stagg"
+    ]
+  },
+  {
+    "county": "Mesa County",
+    "state": "CO",
+    "state_full": "Colorado",
+    "count": 1,
+    "contacts": [
+      "david mccauley"
+    ]
+  },
+  {
+    "county": "Miami County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "kathleen greene"
+    ]
+  },
+  {
+    "county": "Hudson County",
+    "state": "NJ",
+    "state_full": "New Jersey",
+    "count": 1,
+    "contacts": [
+      "mathieu joubert"
+    ]
+  },
+  {
+    "county": "Camden County",
+    "state": "NJ",
+    "state_full": "New Jersey",
+    "count": 1,
+    "contacts": [
+      "jerome brandon"
+    ]
+  },
+  {
+    "county": "Franklin County",
+    "state": "KY",
+    "state_full": "Kentucky",
+    "count": 1,
+    "contacts": [
+      "jason stucker"
+    ]
+  },
+  {
+    "county": "Catoosa County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "christopher hawkins"
+    ]
+  },
+  {
+    "county": "Delaware County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "rebecca piatt"
+    ]
+  },
+  {
+    "county": "Louisa County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "anna pozzie"
+    ]
+  },
+  {
+    "county": "Hennepin County",
+    "state": "MN",
+    "state_full": "Minnesota",
+    "count": 1,
+    "contacts": [
+      "funmilayo adeigbe"
+    ]
+  },
+  {
+    "county": "Fluvanna County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "susan clifton"
+    ]
+  },
+  {
+    "county": "Early County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "arthur mays"
+    ]
+  },
+  {
+    "county": "Boyle County",
+    "state": "KY",
+    "state_full": "Kentucky",
+    "count": 1,
+    "contacts": [
+      "jasmine whited"
+    ]
+  },
+  {
+    "county": "Fayette County",
+    "state": "KY",
+    "state_full": "Kentucky",
+    "count": 1,
+    "contacts": [
+      "paul nelson"
+    ]
+  },
+  {
+    "county": "Brantley County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "arthur debres"
+    ]
+  },
+  {
+    "county": "Mecklenburg County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "sandy townes"
+    ]
+  },
+  {
+    "county": "Bulloch County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "anna mcalhaney"
+    ]
+  },
+  {
+    "county": "Dickson County",
+    "state": "TN",
+    "state_full": "Tennessee",
+    "count": 1,
+    "contacts": [
+      "judy walker"
+    ]
+  },
+  {
+    "county": "Bedford County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "richard wilson"
+    ]
+  },
+  {
+    "county": "Medina County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "patricia depew"
+    ]
+  },
+  {
+    "county": "Erie County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "william kuhn"
+    ]
+  },
+  {
+    "county": "Pike County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "donald stewart"
+    ]
+  },
+  {
+    "county": "Defiance County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "brayton hobbs"
+    ]
+  },
+  {
+    "county": "Charlottesville Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "regina drescher"
+    ]
+  },
+  {
+    "county": "Lawrence County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "adam navitskis"
+    ]
+  },
+  {
+    "county": "Lincoln County",
+    "state": "KY",
+    "state_full": "Kentucky",
+    "count": 1,
+    "contacts": [
+      "paul girky"
+    ]
+  },
+  {
+    "county": "Woodbury County",
+    "state": "IA",
+    "state_full": "Iowa",
+    "count": 1,
+    "contacts": [
+      "lilia segura"
+    ]
+  },
+  {
+    "county": "Poweshiek County",
+    "state": "IA",
+    "state_full": "Iowa",
+    "count": 1,
+    "contacts": [
+      "enrique sanchez"
+    ]
+  },
+  {
+    "county": "Dubuque County",
+    "state": "IA",
+    "state_full": "Iowa",
+    "count": 1,
+    "contacts": [
+      "makayla breitbach"
+    ]
+  },
+  {
+    "county": "Will County",
+    "state": "IL",
+    "state_full": "Illinois",
+    "count": 1,
+    "contacts": [
+      "veronica guajardo"
+    ]
+  },
+  {
+    "county": "Saint Charles County",
+    "state": "MO",
+    "state_full": "Missouri",
+    "count": 1,
+    "contacts": [
+      "matthew bohlmann"
+    ]
+  },
+  {
+    "county": "Logan County",
+    "state": "KENTUCKY",
+    "state_full": "KENTUCKY",
+    "count": 1,
+    "contacts": [
+      "michael brown"
+    ]
+  },
+  {
+    "county": "Knox County",
+    "state": "TENNESSEE",
+    "state_full": "TENNESSEE",
+    "count": 1,
+    "contacts": [
+      "mark hawn"
+    ]
+  },
+  {
+    "county": "Monroe County",
+    "state": "GEORGIA",
+    "state_full": "GEORGIA",
+    "count": 1,
+    "contacts": [
+      "guerla gustave"
+    ]
+  },
+  {
+    "county": "Jefferson County",
+    "state": "KENTUCKY",
+    "state_full": "KENTUCKY",
+    "count": 1,
+    "contacts": [
+      "thomas m perrin"
+    ]
+  },
+  {
+    "county": "Osceola County",
+    "state": "FLORIDA",
+    "state_full": "FLORIDA",
+    "count": 1,
+    "contacts": [
+      "david acosta"
+    ]
+  },
+  {
+    "county": "Shelby County",
+    "state": "ALABAMA",
+    "state_full": "ALABAMA",
+    "count": 1,
+    "contacts": [
+      "james holmes"
+    ]
+  },
+  {
+    "county": "Lee County",
+    "state": "FLORIDA",
+    "state_full": "FLORIDA",
+    "count": 1,
+    "contacts": [
+      "raymond manning"
+    ]
+  },
+  {
+    "county": "Saint Louis County",
+    "state": "MO",
+    "state_full": "Missouri",
+    "count": 1,
+    "contacts": [
+      "izola toy"
+    ]
+  },
+  {
+    "county": "Durham County",
+    "state": "NC",
+    "state_full": "North Carolina",
+    "count": 1,
+    "contacts": [
+      "krutiben naik"
+    ]
+  },
+  {
+    "county": "Pike County",
+    "state": "KY",
+    "state_full": "Kentucky",
+    "count": 1,
+    "contacts": [
+      "joseph mullins"
+    ]
+  },
+  {
+    "county": "Hardin County",
+    "state": "KY",
+    "state_full": "Kentucky",
+    "count": 1,
+    "contacts": [
+      "anthony kyer"
+    ]
+  },
+  {
+    "county": "Lake County",
+    "state": "INDIANA",
+    "state_full": "INDIANA",
+    "count": 1,
+    "contacts": [
+      "freddie batchelor"
+    ]
+  },
+  {
+    "county": "Marion",
+    "state": "INDIANA",
+    "state_full": "INDIANA",
+    "count": 1,
+    "contacts": [
+      "donna green"
+    ]
+  },
+  {
+    "county": "DeKalb County",
+    "state": "GEORGIA",
+    "state_full": "GEORGIA",
+    "count": 1,
+    "contacts": [
+      "andrea leslie"
+    ]
+  },
+  {
+    "county": "Warren County",
+    "state": "KY",
+    "state_full": "Kentucky",
+    "count": 1,
+    "contacts": [
+      "shanlyn bybee"
+    ]
+  },
+  {
+    "county": "King George County",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "corey alicea"
+    ]
+  },
+  {
+    "county": "Murray County",
+    "state": "GA",
+    "state_full": "Georgia",
+    "count": 1,
+    "contacts": [
+      "elizabeth kirk"
+    ]
+  },
+  {
+    "county": "Christian County",
+    "state": "KY",
+    "state_full": "Kentucky",
+    "count": 1,
+    "contacts": [
+      "john and asha rickad"
+    ]
+  },
+  {
+    "county": "Muskingum County",
+    "state": "OH",
+    "state_full": "Ohio",
+    "count": 1,
+    "contacts": [
+      "cory glass"
+    ]
+  },
+  {
+    "county": "Bay County",
+    "state": "FL",
+    "state_full": "Florida",
+    "count": 1,
+    "contacts": [
+      "torrence blackiston"
+    ]
+  },
+  {
+    "county": "Sanilac County",
+    "state": "MI",
+    "state_full": "Michigan",
+    "count": 1,
+    "contacts": [
+      "faith pederson"
+    ]
+  },
+  {
+    "county": "Salem Area",
+    "state": "VA",
+    "state_full": "Virginia",
+    "count": 1,
+    "contacts": [
+      "charles royer"
+    ]
+  },
+  {
+    "county": "Jasper County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "aaron wright"
+    ]
+  },
+  {
+    "county": "DeKalb County",
+    "state": "IN",
+    "state_full": "Indiana",
+    "count": 1,
+    "contacts": [
+      "tyler miller"
+    ]
+  }
+]

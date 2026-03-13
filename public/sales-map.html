@@ -285,15 +285,7 @@ function getKey(f) {
   return (f.properties.name||'').toLowerCase() + '|' + (STATE_FIPS[sf]||'').toLowerCase();
 }
 
-async function fetchData() {
-  const r = await fetch('/api/county-map');
-  if (!r.ok) throw new Error('API ' + r.status);
-  const j = await r.json();
-  if (j.loading) {
-    document.getElementById('load-msg').innerHTML = 'Server gathering GHL data…<br><small style="color:#3a6a3a;font-size:10px">Retrying in 10s</small>';
-    setTimeout(fetchData, 10000);
-    return null;
-  }
+function applyData(j) {
   document.getElementById('s-total').textContent = (j.total||0).toLocaleString();
   document.getElementById('s-counties').textContent = (j.counties||[]).length;
   if (j.lastUpdated) {
@@ -301,6 +293,26 @@ async function fetchData() {
     document.getElementById('s-updated').textContent = d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
   }
   return j.counties || [];
+}
+
+// Load static snapshot first (instant), then fetch live API in background
+async function fetchStaticFallback() {
+  const r = await fetch('/county-data.json');
+  if (!r.ok) return null;
+  const j = await r.json();
+  // county-data.json is array of counties directly
+  const counties = Array.isArray(j) ? j : (j.counties || []);
+  document.getElementById('s-total').textContent = counties.reduce((s,c)=>s+c.count,0).toLocaleString();
+  document.getElementById('s-counties').textContent = counties.length;
+  document.getElementById('s-updated').textContent = 'Cached';
+  return counties;
+}
+
+async function fetchData() {
+  const r = await fetch('/api/county-map');
+  if (!r.ok) throw new Error('API ' + r.status);
+  const j = await r.json();
+  return applyData(j);
 }
 
 function buildIdx(counties) {
@@ -383,16 +395,39 @@ function renderMap(usGeo, idx) {
 
 async function init() {
   try {
-    const [usGeo, counties] = await Promise.all([
+    // Load map geometry + static snapshot in parallel (both fast)
+    const [usGeo, staticCounties] = await Promise.all([
       fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json').then(r=>r.json()),
-      fetchData()
+      fetchStaticFallback()
     ]);
-    if (!counties) return;
+
     topo = usGeo;
-    salesIdx = buildIdx(counties);
-    document.getElementById('loading').classList.add('gone');
-    renderPanel(counties);
-    renderMap(usGeo, salesIdx);
+
+    // Show map immediately from cached data
+    if (staticCounties && staticCounties.length) {
+      salesIdx = buildIdx(staticCounties);
+      document.getElementById('loading').classList.add('gone');
+      renderPanel(staticCounties);
+      renderMap(usGeo, salesIdx);
+    }
+
+    // Then fetch live data in background (may take a few seconds)
+    fetchData().then(liveCounties => {
+      if (!liveCounties) return;
+      salesIdx = buildIdx(liveCounties);
+      document.getElementById('loading').classList.add('gone');
+      renderPanel(liveCounties);
+      renderMap(topo, salesIdx);
+    }).catch(err => {
+      // Live fetch failed — static data is still showing, that's fine
+      console.warn('Live fetch failed, using static data:', err.message);
+      if (!staticCounties) {
+        document.getElementById('load-msg').textContent = 'Error: ' + err.message;
+      } else {
+        document.getElementById('loading').classList.add('gone');
+      }
+    });
+
   } catch(err) {
     document.getElementById('load-msg').textContent = 'Error: '+err.message;
   }

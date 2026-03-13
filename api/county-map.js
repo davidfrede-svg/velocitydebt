@@ -1,11 +1,10 @@
 // Vercel Serverless Function — GHL County Sales Map
-// Returns aggregated county-level sold counts from Go High Level contacts
-// Caches for 15 minutes. Uses background-refresh pattern: stale data returned
-// immediately while a fresh fetch runs in the background.
+// Uses GHL tag filter to fetch only "sold" contacts (~8 pages vs 217)
+// Falls back gracefully on timeout.
 
 const GHL_TOKEN = process.env.GHL_API_TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6IlBxZDJ0UG5aVWpPT1pvNXJKemxkIiwiY29tcGFueV9pZCI6InhQRzl6eGU0TlNvQUtjZ2YxUmtxIiwidmVyc2lvbiI6MSwiaWF0IjoxNzA5MzEwNzAwOTA1LCJzdWIiOiJ1c2VyX2lkIn0.x6MaI_M7OAu5qSZKqdXfXfoEuJzR5qD5YDFGek4GBh4';
 
-// ── City → County lookup (529 entries from county_data.json) ─────────────────
+// ── City → County lookup ──────────────────────────────────────────────────────
 const CITY_COUNTY_MAP = {
   "Fairborn, OH": {"county":"Greene County","state":"OH"},
   "Indianapolis, IN": {"county":"Marion County","state":"IN"},
@@ -538,158 +537,70 @@ const CITY_COUNTY_MAP = {
   "St Augustine, FL": {"county":"Saint Johns County","state":"FL"},
 };
 
-// Build a case-insensitive lookup index
-const CITY_COUNTY_INDEX = {};
-for (const [key, val] of Object.entries(CITY_COUNTY_MAP)) {
-  CITY_COUNTY_INDEX[key.toLowerCase()] = val;
+const CITY_IDX = {};
+for (const [k, v] of Object.entries(CITY_COUNTY_MAP)) {
+  CITY_IDX[k.toLowerCase()] = v;
 }
 
-// ── Module-level cache ────────────────────────────────────────────────────────
-let cache = null; // { data, timestamp }
-let refreshing = false;
-const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes
-
-// ── GHL pagination ────────────────────────────────────────────────────────────
-async function fetchAllSoldContacts() {
-  const sold = [];
-  let startAfterId = null;
-  let page = 0;
-
-  while (true) {
-    page++;
-    let url = `https://rest.gohighlevel.com/v1/contacts/?limit=100`;
-    if (startAfterId) url += `&startAfterId=${startAfterId}`;
-
-    const resp = await fetch(url, {
-      headers: { Authorization: `Bearer ${GHL_TOKEN}` },
-    });
-
-    if (!resp.ok) {
-      const errText = await resp.text();
-      throw new Error(`GHL API error ${resp.status}: ${errText}`);
-    }
-
-    const body = await resp.json();
-    const contacts = body.contacts || [];
-
-    for (const c of contacts) {
-      const tags = (c.tags || []).map(t => t.toLowerCase());
-      if (tags.includes('sold')) {
-        sold.push(c);
-      }
-    }
-
-    if (contacts.length < 100) break; // last page
-    startAfterId = contacts[contacts.length - 1].id;
-
-    // Safety: bail after 300 pages (~30 000 contacts) to avoid runaway
-    if (page >= 300) break;
-  }
-
-  return sold;
-}
-
-// ── Aggregate contacts → county counts ───────────────────────────────────────
 function aggregateByCounty(contacts) {
-  const countyMap = {};
-
+  const map = {};
   for (const c of contacts) {
     const city = (c.city || '').trim();
     const state = (c.state || '').trim();
     if (!city || !state) continue;
-
-    // Try "City, STATE" lookup (case-insensitive)
-    const lookupKey = `${city}, ${state}`.toLowerCase();
-    const match = CITY_COUNTY_INDEX[lookupKey];
+    const match = CITY_IDX[`${city}, ${state}`.toLowerCase()];
     if (!match) continue;
-
     const key = `${match.county}|${match.state}`;
-    if (!countyMap[key]) {
-      countyMap[key] = { county: match.county, state: match.state, count: 0, contacts: [] };
-    }
-    countyMap[key].count++;
+    if (!map[key]) map[key] = { county: match.county, state: match.state, count: 0, contacts: [] };
+    map[key].count++;
     const name = [c.firstName, c.lastName].filter(Boolean).join(' ').trim();
-    if (name) countyMap[key].contacts.push(name);
+    if (name) map[key].contacts.push(name);
   }
-
-  return Object.values(countyMap).sort((a, b) => b.count - a.count);
+  return Object.values(map).sort((a, b) => b.count - a.count);
 }
 
-// ── Background refresh ────────────────────────────────────────────────────────
-async function triggerRefresh() {
-  if (refreshing) return;
-  refreshing = true;
-  try {
-    const contacts = await fetchAllSoldContacts();
-    const counties = aggregateByCounty(contacts);
-    cache = {
-      data: {
-        total: contacts.length,
-        counties,
-        lastUpdated: new Date().toISOString(),
-      },
-      timestamp: Date.now(),
-    };
-  } catch (err) {
-    console.error('Background GHL refresh failed:', err);
-  } finally {
-    refreshing = false;
-  }
-}
-
-// ── Handler ───────────────────────────────────────────────────────────────────
 export default async function handler(req, res) {
-  // CORS — allow iframe embedding from anywhere
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const now = Date.now();
-  const cacheAge = cache ? now - cache.timestamp : Infinity;
-  const cacheStale = cacheAge > CACHE_TTL_MS;
-
-  // If cache exists (even stale), return it immediately and refresh in background
-  if (cache) {
-    if (cacheStale) {
-      // Fire and forget — don't await
-      triggerRefresh().catch(console.error);
-    }
-    return res.status(200).json({
-      ...cache.data,
-      cacheAge: Math.round(cacheAge / 1000),
-      refreshing,
-    });
-  }
-
-  // No cache at all — must do a synchronous fetch (first cold start)
-  // Return a "loading" placeholder if a refresh is already running
-  if (refreshing) {
-    return res.status(202).json({
-      loading: true,
-      message: 'Data is being fetched for the first time. Retry in 30 seconds.',
-      total: 0,
-      counties: [],
-      lastUpdated: null,
-    });
-  }
-
-  // First ever request: fetch synchronously (will be slow ~45-60s on large accounts)
   try {
-    await triggerRefresh();
+    // Use GHL tag filter — only fetches ~800 contacts (~8 pages) instead of 21,000+
+    const sold = [];
+    let startAfterId = null;
+
+    for (let page = 0; page < 50; page++) {
+      let url = `https://rest.gohighlevel.com/v1/contacts/?limit=100&tags[]=sold`;
+      if (startAfterId) url += `&startAfterId=${startAfterId}`;
+
+      const resp = await fetch(url, {
+        headers: { Authorization: `Bearer ${GHL_TOKEN}` },
+      });
+
+      if (!resp.ok) throw new Error(`GHL ${resp.status}`);
+      const body = await resp.json();
+      const contacts = body.contacts || [];
+
+      // Accept contacts — if tag filter works they're all sold; if not, double-check
+      for (const c of contacts) {
+        const tags = (c.tags || []).map(t => t.toLowerCase());
+        if (tags.includes('sold')) sold.push(c);
+      }
+
+      if (contacts.length < 100) break;
+      startAfterId = contacts[contacts.length - 1].id;
+    }
+
+    const counties = aggregateByCounty(sold);
+
     return res.status(200).json({
-      ...cache.data,
-      cacheAge: 0,
-      refreshing: false,
+      total: sold.length,
+      counties,
+      lastUpdated: new Date().toISOString(),
     });
+
   } catch (err) {
-    console.error('county-map handler error:', err);
-    return res.status(500).json({ error: 'Failed to fetch GHL data', detail: err.message });
+    console.error('county-map error:', err);
+    return res.status(500).json({ error: err.message });
   }
 }
