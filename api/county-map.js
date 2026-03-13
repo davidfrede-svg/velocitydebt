@@ -1,0 +1,695 @@
+// Vercel Serverless Function — GHL County Sales Map
+// Returns aggregated county-level sold counts from Go High Level contacts
+// Caches for 15 minutes. Uses background-refresh pattern: stale data returned
+// immediately while a fresh fetch runs in the background.
+
+const GHL_TOKEN = process.env.GHL_API_TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6IlBxZDJ0UG5aVWpPT1pvNXJKemxkIiwiY29tcGFueV9pZCI6InhQRzl6eGU0TlNvQUtjZ2YxUmtxIiwidmVyc2lvbiI6MSwiaWF0IjoxNzA5MzEwNzAwOTA1LCJzdWIiOiJ1c2VyX2lkIn0.x6MaI_M7OAu5qSZKqdXfXfoEuJzR5qD5YDFGek4GBh4';
+
+// ── City → County lookup (529 entries from county_data.json) ─────────────────
+const CITY_COUNTY_MAP = {
+  "Fairborn, OH": {"county":"Greene County","state":"OH"},
+  "Indianapolis, IN": {"county":"Marion County","state":"IN"},
+  "Newport News, VA": {"county":"Newport News Area","state":"VA"},
+  "Virginia Beach, VA": {"county":"Virginia Beach Area","state":"VA"},
+  "Farmland, IN": {"county":"Randolph County","state":"IN"},
+  "Cedar Lake, IN": {"county":"Lake County","state":"IN"},
+  "Bridgeton, NJ": {"county":"Cumberland County","state":"NJ"},
+  "Olive Branch, MS": {"county":"DeSoto County","state":"MS"},
+  "Fort Lauderdale, FL": {"county":"Broward County","state":"FL"},
+  "Pelham, AL": {"county":"Shelby County","state":"AL"},
+  "Conyers, GA": {"county":"Rockdale County","state":"GA"},
+  "Land O' Lakes, FL": {"county":"Pasco County","state":"FL"},
+  "Marion, IA": {"county":"Marion County","state":"IA"},
+  "Ellenwood, GA": {"county":"Clayton County","state":"GA"},
+  "morristown, TN": {"county":"Hamblen County","state":"TN"},
+  "colby, WI": {"county":"Clark County","state":"WI"},
+  "milwaukee, WI": {"county":"Milwaukee County","state":"WI"},
+  "New Port Richey, FL": {"county":"Pasco County","state":"FL"},
+  "Zephyrhills, FL": {"county":"Pasco County","state":"FL"},
+  "Lyons, GA": {"county":"Toombs County","state":"GA"},
+  "Waterloo, IA": {"county":"Black Hawk County","state":"IA"},
+  "Davie, FL": {"county":"Broward County","state":"FL"},
+  "Wellington, FL": {"county":"Palm Beach County","state":"FL"},
+  "Stafford, VA": {"county":"Stafford County","state":"VA"},
+  "Dryden, VA": {"county":"Lee County","state":"VA"},
+  "Akron, OH": {"county":"Summit County","state":"OH"},
+  "Sheffield Lake, OH": {"county":"Lorain County","state":"OH"},
+  "Waukegan, IL": {"county":"Lake County","state":"IL"},
+  "Algonquin, IL": {"county":"McHenry County","state":"IL"},
+  "Euclid, OH": {"county":"Cuyahoga County","state":"OH"},
+  "Newnan, GA": {"county":"Coweta County","state":"GA"},
+  "Toledo, OH": {"county":"Lucas County","state":"OH"},
+  "Thomaston, GA": {"county":"Upson County","state":"GA"},
+  "Minerva, OH": {"county":"Stark County","state":"OH"},
+  "Diamondhead, MS": {"county":"Hancock County","state":"MS"},
+  "Leesburg, VA": {"county":"Loudoun County","state":"VA"},
+  "Newark, OH": {"county":"Licking County","state":"OH"},
+  "Chillicothe, OH": {"county":"Ross County","state":"OH"},
+  "Mattoon, IL": {"county":"Coles County","state":"IL"},
+  "Chicago, IL": {"county":"Cook County","state":"IL"},
+  "Richmond, IN": {"county":"Wayne County","state":"IN"},
+  "Augusta, GA": {"county":"Richmond County","state":"GA"},
+  "Darien, IL": {"county":"DuPage County","state":"IL"},
+  "Naperville, IL": {"county":"DuPage County","state":"IL"},
+  "Yorkville, IL": {"county":"Kendall County","state":"IL"},
+  "Fort Wayne, IN": {"county":"Allen County","state":"IN"},
+  "Staunton, IL": {"county":"Macoupin County","state":"IL"},
+  "Youngstown, OH": {"county":"Mahoning County","state":"OH"},
+  "Lauderhill, FL": {"county":"Broward County","state":"FL"},
+  "Savannah, GA": {"county":"Chatham County","state":"GA"},
+  "Cumming, GA": {"county":"Forsyth County","state":"GA"},
+  "Cuyahoga Falls, OH": {"county":"Summit County","state":"OH"},
+  "Homa, LA": {"county":"Hidalgo County","state":"LA"},
+  "Charlotte, NC": {"county":"Mecklenburg County","state":"NC"},
+  "Atlanta, GA": {"county":"Fulton County","state":"GA"},
+  "Shelbyville, IN": {"county":"Shelby County","state":"IN"},
+  "Englewood, OH": {"county":"Montgomery County","state":"OH"},
+  "Bristow, VA": {"county":"Prince William County","state":"VA"},
+  "Pickerington, OH": {"county":"Fairfield County","state":"OH"},
+  "Ashtabula, OH": {"county":"Ashtabula County","state":"OH"},
+  "Wellston, OH": {"county":"Jackson County","state":"OH"},
+  "Anderson, IN": {"county":"Madison County","state":"IN"},
+  "Bloomington, IN": {"county":"Monroe County","state":"IN"},
+  "Oberlin, OH": {"county":"Lorain County","state":"OH"},
+  "Orient, OH": {"county":"Pickaway County","state":"OH"},
+  "Attica, IN": {"county":"Fountain County","state":"IN"},
+  "Elkhart, IN": {"county":"Elkhart County","state":"IN"},
+  "Lafayette, IN": {"county":"Tippecanoe County","state":"IN"},
+  "Martinsville, IN": {"county":"Morgan County","state":"IN"},
+  "Mcdonough, GA": {"county":"Henry County","state":"GA"},
+  "Kokomo, IN": {"county":"Howard County","state":"IN"},
+  "Columbus, GA": {"county":"Muscogee County","state":"GA"},
+  "Buford, GA": {"county":"Gwinnett County","state":"GA"},
+  "Pioneer, OH": {"county":"Williams County","state":"OH"},
+  "Mc Kenzie, TN": {"county":"Carroll County","state":"TN"},
+  "Douglasville, GA": {"county":"Douglas County","state":"GA"},
+  "Riverdale, GA": {"county":"Clayton County","state":"GA"},
+  "Covington, GA": {"county":"Newton County","state":"GA"},
+  "Frankfort, OH": {"county":"Ross County","state":"OH"},
+  "Bedford, OH": {"county":"Cuyahoga County","state":"OH"},
+  "Greenwood, IN": {"county":"Johnson County","state":"IN"},
+  "Roanoke, VA": {"county":"Roanoke Area","state":"VA"},
+  "Henrico, VA": {"county":"Henrico County","state":"VA"},
+  "Manassas Park, VA": {"county":"Manassas Park Area","state":"VA"},
+  "Alexandria, IN": {"county":"Madison County","state":"IN"},
+  "Garrettsville, OH": {"county":"Portage County","state":"OH"},
+  "Stockbridge, GA": {"county":"Henry County","state":"GA"},
+  "Centerville, GA": {"county":"Houston County","state":"GA"},
+  "Noblesville, IN": {"county":"Hamilton County","state":"IN"},
+  "Norwalk, OH": {"county":"Huron County","state":"OH"},
+  "Wickliffe, OH": {"county":"Lake County","state":"OH"},
+  "Kennesaw, GA": {"county":"Cobb County","state":"GA"},
+  "Suffolk, VA": {"county":"Suffolk Area","state":"VA"},
+  "Lancaster, OH": {"county":"Fairfield County","state":"OH"},
+  "Fort Valley, GA": {"county":"Peach County","state":"GA"},
+  "Cincinnati, OH": {"county":"Hamilton County","state":"OH"},
+  "Fremont, OH": {"county":"Sandusky County","state":"OH"},
+  "Strasburg, VA": {"county":"Shenandoah County","state":"VA"},
+  "Chesterfield, VA": {"county":"Chesterfield County","state":"VA"},
+  "Van Wert, OH": {"county":"Van Wert County","state":"OH"},
+  "Campbell, OH": {"county":"Mahoning County","state":"OH"},
+  "Dalton, GA": {"county":"Whitfield County","state":"GA"},
+  "Canton, OH": {"county":"Stark County","state":"OH"},
+  "Montpelier, IN": {"county":"Blackford County","state":"IN"},
+  "Columbia Station, OH": {"county":"Lorain County","state":"OH"},
+  "La Fontaine, IN": {"county":"Wabash County","state":"IN"},
+  "Roberta, GA": {"county":"Crawford County","state":"GA"},
+  "Mentone, IN": {"county":"Kosciusko County","state":"IN"},
+  "Detroit, MI": {"county":"Wayne County","state":"MI"},
+  "Monroe, GA": {"county":"Monroe County","state":"GA"},
+  "Heath, OH": {"county":"Licking County","state":"OH"},
+  "Richmond, KY": {"county":"Madison County","state":"KY"},
+  "Jackson, MS": {"county":"Hinds County","state":"MS"},
+  "Dillon, SC": {"county":"Dillon County","state":"SC"},
+  "Clyde, TX": {"county":"Callahan County","state":"TX"},
+  "Horn Lake, MS": {"county":"DeSoto County","state":"MS"},
+  "Portland, TN": {"county":"Sumner County","state":"TN"},
+  "Kingston, TN": {"county":"Roane County","state":"TN"},
+  "Glen Haven, FL": {"county":"Orange County","state":"FL"},
+  "Fort Worth, TX": {"county":"Tarrant County","state":"TX"},
+  "Palmyra, TN": {"county":"Montgomery County","state":"TN"},
+  "Talladega, AL": {"county":"Talladega County","state":"AL"},
+  "Knoxville, TN": {"county":"Knox County","state":"TN"},
+  "Mountain City, TN": {"county":"Johnson County","state":"TN"},
+  "Dallas, TX": {"county":"Dallas County","state":"TX"},
+  "Kershaw, SC": {"county":"Kershaw County","state":"SC"},
+  "Starkville, MS": {"county":"Oktibbeha County","state":"MS"},
+  "Water Valley, MS": {"county":"Yalobusha County","state":"MS"},
+  "Jackson, MI": {"county":"Jackson County","state":"MI"},
+  "Farner, TN": {"county":"Polk County","state":"TN"},
+  "Oliver Springs, TN": {"county":"Roane County","state":"TN"},
+  "Houghton Lake, MI": {"county":"Roscommon County","state":"MI"},
+  "Gilbertown, AL": {"county":"Choctaw County","state":"AL"},
+  "Ocean Park, WA": {"county":"Pacific County","state":"WA"},
+  "Woodlawn, TN": {"county":"Montgomery County","state":"TN"},
+  "Springfield, OH": {"county":"Clark County","state":"OH"},
+  "Cat Spring, TX": {"county":"Austin County","state":"TX"},
+  "Houston, TX": {"county":"Harris County","state":"TX"},
+  "Bartlett, TN": {"county":"Shelby County","state":"TN"},
+  "Lancing, TN": {"county":"Morgan County","state":"TN"},
+  "Cisco, TX": {"county":"Eastland County","state":"TX"},
+  "Jacksonville, FL": {"county":"Duval County","state":"FL"},
+  "Tenino, WA": {"county":"Thurston County","state":"WA"},
+  "Etowah, TN": {"county":"McMinn County","state":"TN"},
+  "Melbourne, FL": {"county":"Brevard County","state":"FL"},
+  "Miami, FL": {"county":"Miami-Dade County","state":"FL"},
+  "Clewiston, FL": {"county":"Hendry County","state":"FL"},
+  "Ocean Springs, MS": {"county":"Jackson County","state":"MS"},
+  "Harriman, TN": {"county":"Roane County","state":"TN"},
+  "Lake Alfred, FL": {"county":"Polk County","state":"FL"},
+  "Truth Or Consequences, NM": {"county":"Sierra County","state":"NM"},
+  "San Antonio, TX": {"county":"Bexar County","state":"TX"},
+  "Smithville, TN": {"county":"DeKalb County","state":"TN"},
+  "Huntsville, AL": {"county":"Madison County","state":"AL"},
+  "Brownsville, TX": {"county":"Cameron County","state":"TX"},
+  "Radford, VA": {"county":"Radford Area","state":"VA"},
+  "Memphis, TN": {"county":"Shelby County","state":"TN"},
+  "Clevland, OH": {"county":"Columbiana County","state":"OH"},
+  "Ithaca, MI": {"county":"Gratiot County","state":"MI"},
+  "Laguna, NM": {"county":"Cibola County","state":"NM"},
+  "Fayetteville, TN": {"county":"Lincoln County","state":"TN"},
+  "Savannah, TN": {"county":"Hardin County","state":"TN"},
+  "Beechgrove, TN": {"county":"Coffee County","state":"TN"},
+  "Santa Clara, NM": {"county":"Grant County","state":"NM"},
+  "Phenix, AL": {"county":"Russell County","state":"AL"},
+  "Dayton, OH": {"county":"Montgomery County","state":"OH"},
+  "La Vergne, TN": {"county":"Rutherford County","state":"TN"},
+  "Heath Springs, SC": {"county":"Lancaster County","state":"SC"},
+  "Bryan, TX": {"county":"Brazos County","state":"TX"},
+  "Opelika, AL": {"county":"Lee County","state":"AL"},
+  "Somerville, AL": {"county":"Morgan County","state":"AL"},
+  "Pensacola, FL": {"county":"Escambia County","state":"FL"},
+  "Lugoff, SC": {"county":"Kershaw County","state":"SC"},
+  "Mathiston, MS": {"county":"Webster County","state":"MS"},
+  "Westland, MI": {"county":"Wayne County","state":"MI"},
+  "Humboldt, TN": {"county":"Gibson County","state":"TN"},
+  "Austin, TX": {"county":"Travis County","state":"TX"},
+  "Summerdale, AL": {"county":"Baldwin County","state":"AL"},
+  "Port Arthur, TX": {"county":"Jefferson County","state":"TX"},
+  "Norfolk, VA": {"county":"Norfolk Area","state":"VA"},
+  "Walhalla, SC": {"county":"Oconee County","state":"SC"},
+  "Senatobia, MS": {"county":"Tate County","state":"MS"},
+  "Birmingham, AL": {"county":"Jefferson County","state":"AL"},
+  "Forest, MS": {"county":"Scott County","state":"MS"},
+  "Waller, TX": {"county":"Waller County","state":"TX"},
+  "Demopolis, AL": {"county":"Marengo County","state":"AL"},
+  "Brandon, MS": {"county":"Rankin County","state":"MS"},
+  "Phenix City, AL": {"county":"Russell County","state":"AL"},
+  "Northport, AL": {"county":"Tuscaloosa County","state":"AL"},
+  "Oakwood, TX": {"county":"Leon County","state":"TX"},
+  "Pontotoc, MS": {"county":"Pontotoc County","state":"MS"},
+  "Carthage, MS": {"county":"Leake County","state":"MS"},
+  "Lindell, TX": {"county":"Dallas County","state":"TX"},
+  "Gulfport, MS": {"county":"Harrison County","state":"MS"},
+  "Lawrenceville, VA": {"county":"Brunswick County","state":"VA"},
+  "Jasper, AL": {"county":"Walker County","state":"AL"},
+  "Clarkston, WA": {"county":"Asotin County","state":"WA"},
+  "Mobile, AL": {"county":"Mobile County","state":"AL"},
+  "Louisville, MS": {"county":"Winston County","state":"MS"},
+  "Greenville, SC": {"county":"Greenville County","state":"SC"},
+  "Atmore, AL": {"county":"Escambia County","state":"AL"},
+  "Arley, AL": {"county":"Winston County","state":"AL"},
+  "Apalachicola, FL": {"county":"Franklin County","state":"FL"},
+  "Purvis, MS": {"county":"Lamar County","state":"MS"},
+  "Deatsville, AL": {"county":"Elmore County","state":"AL"},
+  "Baldwyn, MS": {"county":"Lee County","state":"MS"},
+  "Crystal Springs, MS": {"county":"Copiah County","state":"MS"},
+  "Bessemer, AL": {"county":"Jefferson County","state":"AL"},
+  "Canton, MI": {"county":"Madison County","state":"MI"},
+  "Trenton, NJ": {"county":"Mercer County","state":"NJ"},
+  "Arab, AL": {"county":"Marshall County","state":"AL"},
+  "Lynnwood, WA": {"county":"Snohomish County","state":"WA"},
+  "Fort Payne, AL": {"county":"DeKalb County","state":"AL"},
+  "Nashville, TN": {"county":"Davidson County","state":"TN"},
+  "Ocala, FL": {"county":"Marion County","state":"FL"},
+  "Lakeland, FL": {"county":"Polk County","state":"FL"},
+  "Saint Cloud, FL": {"county":"Osceola County","state":"FL"},
+  "Silsbee, TX": {"county":"Hardin County","state":"TX"},
+  "Selma, AL": {"county":"Dallas County","state":"AL"},
+  "Murfreesboro, TN": {"county":"Rutherford County","state":"TN"},
+  "Mascot, TN": {"county":"Knox County","state":"TN"},
+  "Cherokee, AL": {"county":"Cherokee County","state":"AL"},
+  "Ridgeville, SC": {"county":"Dorchester County","state":"SC"},
+  "Saint Augustine, FL": {"county":"Saint Johns County","state":"FL"},
+  "Lake Worth, FL": {"county":"Palm Beach County","state":"FL"},
+  "Middleburg, FL": {"county":"Clay County","state":"FL"},
+  "Gary, IN": {"county":"Lake County","state":"IN"},
+  "Clarksville, TN": {"county":"Montgomery County","state":"TN"},
+  "Muncie, IN": {"county":"Delaware County","state":"IN"},
+  "Petal, MS": {"county":"Forrest County","state":"MS"},
+  "Orlando, FL": {"county":"Orange County","state":"FL"},
+  "Ider, AL": {"county":"DeKalb County","state":"AL"},
+  "Russellville, AL": {"county":"Franklin County","state":"AL"},
+  "Carriere, MS": {"county":"Pearl River County","state":"MS"},
+  "Dresden, TN": {"county":"Weakley County","state":"TN"},
+  "Colorado, TX": {"county":"Colorado County","state":"TX"},
+  "Elmendorf, TX": {"county":"Bexar County","state":"TX"},
+  "Harvey, ND": {"county":"Wells County","state":"ND"},
+  "Huntington, IN": {"county":"Huntington County","state":"IN"},
+  "Sedona, AZ": {"county":"Coconino County","state":"AZ"},
+  "Angola, IN": {"county":"Steuben County","state":"IN"},
+  "Evansville, IN": {"county":"Vanderburgh County","state":"IN"},
+  "Casa Grande, AZ": {"county":"Pinal County","state":"AZ"},
+  "Rio Rico, AZ": {"county":"Santa Cruz County","state":"AZ"},
+  "Ruidoso, NM": {"county":"Lincoln County","state":"NM"},
+  "Farmington, NM": {"county":"San Juan County","state":"NM"},
+  "Knox, IN": {"county":"Knox County","state":"IN"},
+  "Clintwood, VA": {"county":"Dickenson County","state":"VA"},
+  "Lecanto, FL": {"county":"Citrus County","state":"FL"},
+  "Chattanooga, TN": {"county":"Hamilton County","state":"TN"},
+  "Decatur, AL": {"county":"Morgan County","state":"AL"},
+  "Spencerville, OH": {"county":"Allen County","state":"OH"},
+  "Reynoldsburg, OH": {"county":"Franklin County","state":"OH"},
+  "Spring Lake, MI": {"county":"Ottawa County","state":"MI"},
+  "Battle Ground, WA": {"county":"Clark County","state":"WA"},
+  "Shelton, WA": {"county":"Mason County","state":"WA"},
+  "Greencastle, IN": {"county":"Putnam County","state":"IN"},
+  "Osseo, MI": {"county":"Hillsdale County","state":"MI"},
+  "Port Huron, MI": {"county":"Saint Clair County","state":"MI"},
+  "Phoenix, AZ": {"county":"Maricopa County","state":"AZ"},
+  "Hobart, IN": {"county":"Lake County","state":"IN"},
+  "Prescott Valley, AZ": {"county":"Yavapai County","state":"AZ"},
+  "Brownsburg, IN": {"county":"Hendricks County","state":"IN"},
+  "Hebron, IN": {"county":"Porter County","state":"IN"},
+  "The Villages, FL": {"county":"Sumter County","state":"FL"},
+  "Mesa, AZ": {"county":"Maricopa County","state":"AZ"},
+  "Starke, FL": {"county":"Bradford County","state":"FL"},
+  "Beverly Hills, FL": {"county":"Citrus County","state":"FL"},
+  "Buckeye, AZ": {"county":"Maricopa County","state":"AZ"},
+  "Edgewood, NM": {"county":"Santa Fe County","state":"NM"},
+  "Glendale, AZ": {"county":"Maricopa County","state":"AZ"},
+  "Columbia City, IN": {"county":"Whitley County","state":"IN"},
+  "Albuquerque, NM": {"county":"Bernalillo County","state":"NM"},
+  "Alamogordo, NM": {"county":"Otero County","state":"NM"},
+  "Bullhead City, AZ": {"county":"Mohave County","state":"AZ"},
+  "Mc Lain, MS": {"county":"Forrest County","state":"MS"},
+  "Williston, ND": {"county":"Williams County","state":"ND"},
+  "Tucson, AZ": {"county":"Pima County","state":"AZ"},
+  "Artesia, NM": {"county":"Eddy County","state":"NM"},
+  "Millville, NJ": {"county":"Cumberland County","state":"NJ"},
+  "Gallup, NM": {"county":"McKinley County","state":"NM"},
+  "Merritt Island, FL": {"county":"Brevard County","state":"FL"},
+  "Sun City, AZ": {"county":"Maricopa County","state":"AZ"},
+  "Hackensack, NJ": {"county":"Bergen County","state":"NJ"},
+  "Sullivan, IN": {"county":"Sullivan County","state":"IN"},
+  "Mohave Valley, AZ": {"county":"Mohave County","state":"AZ"},
+  "Haslet, TX": {"county":"Tarrant County","state":"TX"},
+  "Holts Summit, MO": {"county":"Callaway County","state":"MO"},
+  "Maricopa, AZ": {"county":"Maricopa County","state":"AZ"},
+  "Selma, IN": {"county":"Delaware County","state":"IN"},
+  "Hilliard, FL": {"county":"Nassau County","state":"FL"},
+  "Apache Junction, AZ": {"county":"Pinal County","state":"AZ"},
+  "Mandan, ND": {"county":"Morton County","state":"ND"},
+  "Port Charlotte, FL": {"county":"Charlotte County","state":"FL"},
+  "Tularosa, NM": {"county":"Otero County","state":"NM"},
+  "Las Cruces, NM": {"county":"Doña Ana County","state":"NM"},
+  "Roswell, NM": {"county":"Chaves County","state":"NM"},
+  "Clovis, NM": {"county":"Curry County","state":"NM"},
+  "Warsaw, VA": {"county":"Richmond County","state":"VA"},
+  "Tucumcari, NM": {"county":"Quay County","state":"NM"},
+  "Dothan, AL": {"county":"Houston County","state":"AL"},
+  "Live Oak, FL": {"county":"Suwannee County","state":"FL"},
+  "Ringgold, VA": {"county":"Pittsylvania County","state":"VA"},
+  "Gwinner, ND": {"county":"Sargent County","state":"ND"},
+  "Tolleson, AZ": {"county":"Maricopa County","state":"AZ"},
+  "Littleton, CO": {"county":"Arapahoe County","state":"CO"},
+  "Sierra Vista, AZ": {"county":"Cochise County","state":"AZ"},
+  "Carmel, IN": {"county":"Hamilton County","state":"IN"},
+  "West Fargo, ND": {"county":"Cass County","state":"ND"},
+  "Newberry, FL": {"county":"Alachua County","state":"FL"},
+  "Waco, TX": {"county":"McLennan County","state":"TX"},
+  "Bluemont, VA": {"county":"Loudoun County","state":"VA"},
+  "Danville, VA": {"county":"Danville Area","state":"VA"},
+  "Yorktown, VA": {"county":"York County","state":"VA"},
+  "Lake Havasu City, AZ": {"county":"Mohave County","state":"AZ"},
+  "Aztec, NM": {"county":"San Juan County","state":"NM"},
+  "Richmond, VA": {"county":"Richmond Area","state":"VA"},
+  "Columbus, OH": {"county":"Franklin County","state":"OH"},
+  "Valrico, FL": {"county":"Hillsborough County","state":"FL"},
+  "Los Lunas, NM": {"county":"Valencia County","state":"NM"},
+  "Chesapeake, VA": {"county":"Chesapeake Area","state":"VA"},
+  "Snohomish, WA": {"county":"Snohomish County","state":"WA"},
+  "East Dublin, GA": {"county":"Laurens County","state":"GA"},
+  "Blooming Prairie, MN": {"county":"Steele County","state":"MN"},
+  "Hampton, VA": {"county":"Hampton Area","state":"VA"},
+  "Evington, VA": {"county":"Campbell County","state":"VA"},
+  "Bismarck, ND": {"county":"Burleigh County","state":"ND"},
+  "Valley City, ND": {"county":"Barnes County","state":"ND"},
+  "Fries, VA": {"county":"Grayson County","state":"VA"},
+  "Stony Creek, VA": {"county":"Sussex County","state":"VA"},
+  "Wabash, IN": {"county":"Wabash County","state":"IN"},
+  "Yakima, WA": {"county":"Yakima County","state":"WA"},
+  "Woodbridge, VA": {"county":"Prince William County","state":"VA"},
+  "Pontiac, MI": {"county":"Oakland County","state":"MI"},
+  "Nashville, MI": {"county":"Barry County","state":"MI"},
+  "Carlsbad, NM": {"county":"Eddy County","state":"NM"},
+  "Manassas, VA": {"county":"Manassas Area","state":"VA"},
+  "Green Valley, AZ": {"county":"Pima County","state":"AZ"},
+  "Coolidge, AZ": {"county":"Pinal County","state":"AZ"},
+  "Avon, IN": {"county":"Hendricks County","state":"IN"},
+  "Hannibal, MO": {"county":"Marion County","state":"MO"},
+  "Lebanon, IN": {"county":"Boone County","state":"IN"},
+  "Bremerton, WA": {"county":"Kitsap County","state":"WA"},
+  "Salem, IN": {"county":"Washington County","state":"IN"},
+  "Vail, AZ": {"county":"Pima County","state":"AZ"},
+  "Jonesboro, IN": {"county":"Grant County","state":"IN"},
+  "Chino Valley, AZ": {"county":"Yavapai County","state":"AZ"},
+  "Eastpointe, MI": {"county":"Macomb County","state":"MI"},
+  "Newburgh, IN": {"county":"Warrick County","state":"IN"},
+  "Cabool, MO": {"county":"Texas County","state":"MO"},
+  "Schererville, IN": {"county":"Lake County","state":"IN"},
+  "Chatham, VA": {"county":"Pittsylvania County","state":"VA"},
+  "Kingman, AZ": {"county":"Mohave County","state":"AZ"},
+  "Florence, AZ": {"county":"Pinal County","state":"AZ"},
+  "Madison, OH": {"county":"Madison County","state":"OH"},
+  "Yuma, AZ": {"county":"Yuma County","state":"AZ"},
+  "Kennewick, WA": {"county":"Benton County","state":"WA"},
+  "Brick, NJ": {"county":"Ocean County","state":"NJ"},
+  "Manalapan, NJ": {"county":"Monmouth County","state":"NJ"},
+  "Aberdeen, WA": {"county":"Grays Harbor County","state":"WA"},
+  "Ashland City, TN": {"county":"Cheatham County","state":"TN"},
+  "Holiday, FL": {"county":"Pasco County","state":"FL"},
+  "Maryville, TN": {"county":"Blount County","state":"TN"},
+  "Margate, FL": {"county":"Broward County","state":"FL"},
+  "Chiefland, FL": {"county":"Levy County","state":"FL"},
+  "Monett, MO": {"county":"Barry County","state":"MO"},
+  "Youngtown, AZ": {"county":"Maricopa County","state":"AZ"},
+  "Arcadia, FL": {"county":"DeSoto County","state":"FL"},
+  "South Bend, IN": {"county":"Saint Joseph County","state":"IN"},
+  "Winslow, AZ": {"county":"Navajo County","state":"AZ"},
+  "Auburn, WA": {"county":"King County","state":"WA"},
+  "Michigan City, IN": {"county":"LaPorte County","state":"IN"},
+  "Walkerton, IN": {"county":"Saint Joseph County","state":"IN"},
+  "Sturgeon Bay, WI": {"county":"Door County","state":"WI"},
+  "Seatac, WA": {"county":"King County","state":"WA"},
+  "Largo, FL": {"county":"Pinellas County","state":"FL"},
+  "Chesterton, IN": {"county":"Porter County","state":"IN"},
+  "Chandler, AZ": {"county":"Maricopa County","state":"AZ"},
+  "El Mirage, AZ": {"county":"Maricopa County","state":"AZ"},
+  "Columbia, MO": {"county":"Boone County","state":"MO"},
+  "Hamilton, OH": {"county":"Butler County","state":"OH"},
+  "Burlington Junction, MO": {"county":"Nodaway County","state":"MO"},
+  "Athens, GA": {"county":"Clarke County","state":"GA"},
+  "Buckner, MO": {"county":"Jackson County","state":"MO"},
+  "Lebanon, MO": {"county":"Laclede County","state":"MO"},
+  "Milledgeville, GA": {"county":"Baldwin County","state":"GA"},
+  "Edison, NJ": {"county":"Middlesex County","state":"NJ"},
+  "Fredericksburg, VA": {"county":"Fredericksburg Area","state":"VA"},
+  "East Windsor, NJ": {"county":"Mercer County","state":"NJ"},
+  "Nutley, NJ": {"county":"Essex County","state":"NJ"},
+  "Staunton, VA": {"county":"Staunton Area","state":"VA"},
+  "Dallas, GA": {"county":"Paulding County","state":"GA"},
+  "Boonville, IN": {"county":"Warrick County","state":"IN"},
+  "Olmsted Falls, OH": {"county":"Cuyahoga County","state":"OH"},
+  "Galloway, OH": {"county":"Franklin County","state":"OH"},
+  "Mansfield, OH": {"county":"Richland County","state":"OH"},
+  "Norton, OH": {"county":"Summit County","state":"OH"},
+  "Beech Grove, IN": {"county":"Marion County","state":"IN"},
+  "New Albany, IN": {"county":"Floyd County","state":"IN"},
+  "Marion, IN": {"county":"Grant County","state":"IN"},
+  "Chandler, IN": {"county":"Warrick County","state":"IN"},
+  "Warner Robins, GA": {"county":"Houston County","state":"GA"},
+  "Tallahassee, FL": {"county":"Leon County","state":"FL"},
+  "Crawfordsville, IN": {"county":"Montgomery County","state":"IN"},
+  "Aragon, GA": {"county":"Polk County","state":"GA"},
+  "Stone Mountain, GA": {"county":"DeKalb County","state":"GA"},
+  "Guyton, GA": {"county":"Effingham County","state":"GA"},
+  "Conneaut, OH": {"county":"Ashtabula County","state":"OH"},
+  "Groveport, OH": {"county":"Franklin County","state":"OH"},
+  "Pekin, IN": {"county":"Washington County","state":"IN"},
+  "Mount Vernon, IN": {"county":"Posey County","state":"IN"},
+  "New Plymouth, ID": {"county":"Payette County","state":"ID"},
+  "Dickinson, ND": {"county":"Stark County","state":"ND"},
+  "Cottonwood, AZ": {"county":"Yavapai County","state":"AZ"},
+  "Granger, IN": {"county":"Saint Joseph County","state":"IN"},
+  "Goshen, IN": {"county":"Elkhart County","state":"IN"},
+  "Franklin, IN": {"county":"Franklin County","state":"IN"},
+  "Richland, WA": {"county":"Benton County","state":"WA"},
+  "Lincoln Park, MI": {"county":"Wayne County","state":"MI"},
+  "Hoover, AL": {"county":"Jefferson County","state":"AL"},
+  "Hagerstown, IN": {"county":"Wayne County","state":"IN"},
+  "Crossville, AL": {"county":"DeKalb County","state":"AL"},
+  "Renton, WA": {"county":"King County","state":"WA"},
+  "Ripley, MS": {"county":"Tippah County","state":"MS"},
+  "Piedmont, AL": {"county":"Calhoun County","state":"AL"},
+  "Hilliard, OH": {"county":"Franklin County","state":"OH"},
+  "Lynchburg, VA": {"county":"Lynchburg Area","state":"VA"},
+  "Clifton, CO": {"county":"Mesa County","state":"CO"},
+  "Troy, OH": {"county":"Miami County","state":"OH"},
+  "Jersey City, NJ": {"county":"Hudson County","state":"NJ"},
+  "Odessa, FL": {"county":"Pasco County","state":"FL"},
+  "Monroe Township, NJ": {"county":"Middlesex County","state":"NJ"},
+  "Jackson, NJ": {"county":"Camden County","state":"NJ"},
+  "Toms River, NJ": {"county":"Ocean County","state":"NJ"},
+  "Gretna, VA": {"county":"Pittsylvania County","state":"VA"},
+  "Dublin, GA": {"county":"Laurens County","state":"GA"},
+  "Frankfort, KY": {"county":"Franklin County","state":"KY"},
+  "Fort Oglethorpe, GA": {"county":"Catoosa County","state":"GA"},
+  "Ostrander, OH": {"county":"Delaware County","state":"OH"},
+  "Maple Heights, OH": {"county":"Cuyahoga County","state":"OH"},
+  "Bumpass, VA": {"county":"Louisa County","state":"VA"},
+  "Leeds, AL": {"county":"Jefferson County","state":"AL"},
+  "Montevallo, AL": {"county":"Shelby County","state":"AL"},
+  "Pierceton, IN": {"county":"Kosciusko County","state":"IN"},
+  "Beavercreek, OH": {"county":"Greene County","state":"OH"},
+  "Laveen, AZ": {"county":"Maricopa County","state":"AZ"},
+  "Cleveland, OH": {"county":"Cuyahoga County","state":"OH"},
+  "Fairfield, OH": {"county":"Butler County","state":"OH"},
+  "McCordsville, IN": {"county":"Hancock County","state":"IN"},
+  "Minneapolis, MN": {"county":"Hennepin County","state":"MN"},
+  "Plymouth, IN": {"county":"Marshall County","state":"IN"},
+  "Westerville, OH": {"county":"Franklin County","state":"OH"},
+  "Sterling, VA": {"county":"Loudoun County","state":"VA"},
+  "Portsmouth, VA": {"county":"Portsmouth Area","state":"VA"},
+  "Columbia, VA": {"county":"Fluvanna County","state":"VA"},
+  "Blakely, GA": {"county":"Early County","state":"GA"},
+  "Danville, KY": {"county":"Boyle County","state":"KY"},
+  "Lexington, KY": {"county":"Fayette County","state":"KY"},
+  "Winona Lake, IN": {"county":"Kosciusko County","state":"IN"},
+  "Lorain, OH": {"county":"Lorain County","state":"OH"},
+  "Hortense, GA": {"county":"Brantley County","state":"GA"},
+  "Powder Springs, GA": {"county":"Cobb County","state":"GA"},
+  "Hephzibah, GA": {"county":"Richmond County","state":"GA"},
+  "Jonesboro, GA": {"county":"Clayton County","state":"GA"},
+  "Chase City, VA": {"county":"Mecklenburg County","state":"VA"},
+  "Statesboro, GA": {"county":"Bulloch County","state":"GA"},
+  "Hampton, GA": {"county":"Henry County","state":"GA"},
+  "Charlotte, TN": {"county":"Dickson County","state":"TN"},
+  "Huddleston, VA": {"county":"Bedford County","state":"VA"},
+  "Medina, OH": {"county":"Medina County","state":"OH"},
+  "Massillon, OH": {"county":"Stark County","state":"OH"},
+  "Vermilion, OH": {"county":"Erie County","state":"OH"},
+  "Waverly, OH": {"county":"Pike County","state":"OH"},
+  "Defiance, OH": {"county":"Defiance County","state":"OH"},
+  "Charlottesville, VA": {"county":"Charlottesville Area","state":"VA"},
+  "South Point, OH": {"county":"Lawrence County","state":"OH"},
+  "Barberton, OH": {"county":"Summit County","state":"OH"},
+  "Warsaw, IN": {"county":"Kosciusko County","state":"IN"},
+  "Waynesburg, KY": {"county":"Lincoln County","state":"KY"},
+  "Zionsville, IN": {"county":"Boone County","state":"IN"},
+  "Sebatian, FL": {"county":"Brevard County","state":"FL"},
+  "Sioux City, IA": {"county":"Woodbury County","state":"IA"},
+  "Grinnell, IA": {"county":"Poweshiek County","state":"IA"},
+  "Dubuque, IA": {"county":"Dubuque County","state":"IA"},
+  "Bolingbrook, IL": {"county":"Will County","state":"IL"},
+  "Addison, IL": {"county":"DuPage County","state":"IL"},
+  "Forest Park, IL": {"county":"Cook County","state":"IL"},
+  "Kansas City, MO": {"county":"Jackson County","state":"MO"},
+  "Saint Charles, MO": {"county":"Saint Charles County","state":"MO"},
+  "Russellville, KENTUCKY": {"county":"Logan County","state":"KY"},
+  "Kingsford, TENNESSEE": {"county":"Knox County","state":"TN"},
+  "Monroe, GEORGIA": {"county":"Monroe County","state":"GA"},
+  "Louisville, KENTUCKY": {"county":"Jefferson County","state":"KY"},
+  "Fountain Inn, SC": {"county":"Greenville County","state":"SC"},
+  "St Cloud, FLORIDA": {"county":"Osceola County","state":"FL"},
+  "Alabaster, ALABAMA": {"county":"Shelby County","state":"AL"},
+  "Cape Coral, FLORIDA": {"county":"Lee County","state":"FL"},
+  "Florissant, MO": {"county":"Saint Louis County","state":"MO"},
+  "Durham, NC": {"county":"Durham County","state":"NC"},
+  "Louisville, KY": {"county":"Jefferson County","state":"KY"},
+  "Virgie, KY": {"county":"Pike County","state":"KY"},
+  "Elizabethtown, KY": {"county":"Hardin County","state":"KY"},
+  "Hammond, INDIANA": {"county":"Lake County","state":"IN"},
+  "Indianapolis, INDIANA": {"county":"Marion County","state":"IN"},
+  "Lithonia, GEORGIA": {"county":"DeKalb County","state":"GA"},
+  "Land O Lakes, FL": {"county":"Pasco County","state":"FL"},
+  "Bowling Green, KY": {"county":"Warren County","state":"KY"},
+  "Crown Point, IN": {"county":"Lake County","state":"IN"},
+  "South Padre Island, TX": {"county":"Cameron County","state":"TX"},
+  "Lillian, AL": {"county":"Baldwin County","state":"AL"},
+  "Nogales, AZ": {"county":"Santa Cruz County","state":"AZ"},
+  "King George, VA": {"county":"King George County","state":"VA"},
+  "Leo, IN": {"county":"Allen County","state":"IN"},
+  "Chatsworth, GA": {"county":"Murray County","state":"GA"},
+  "Oak Grove, KY": {"county":"Christian County","state":"KY"},
+  "Zanesville, OH": {"county":"Muskingum County","state":"OH"},
+  "Middletown, OH": {"county":"Butler County","state":"OH"},
+  "Greenfield, IN": {"county":"Hancock County","state":"IN"},
+  "Youngstown, FL": {"county":"Bay County","state":"FL"},
+  "Clyo, GA": {"county":"Effingham County","state":"GA"},
+  "Croswell, MI": {"county":"Sanilac County","state":"MI"},
+  "Alpharetta, GA": {"county":"Fulton County","state":"GA"},
+  "Bremen, IN": {"county":"Marshall County","state":"IN"},
+  "Salem, VA": {"county":"Salem Area","state":"VA"},
+  "Newark, NJ": {"county":"Essex County","state":"NJ"},
+  "Wheatfield, IN": {"county":"Jasper County","state":"IN"},
+  "Lithia Springs, GA": {"county":"Douglas County","state":"GA"},
+  "Auburn, IN": {"county":"DeKalb County","state":"IN"},
+  "St Augustine, FL": {"county":"Saint Johns County","state":"FL"},
+};
+
+// Build a case-insensitive lookup index
+const CITY_COUNTY_INDEX = {};
+for (const [key, val] of Object.entries(CITY_COUNTY_MAP)) {
+  CITY_COUNTY_INDEX[key.toLowerCase()] = val;
+}
+
+// ── Module-level cache ────────────────────────────────────────────────────────
+let cache = null; // { data, timestamp }
+let refreshing = false;
+const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes
+
+// ── GHL pagination ────────────────────────────────────────────────────────────
+async function fetchAllSoldContacts() {
+  const sold = [];
+  let startAfterId = null;
+  let page = 0;
+
+  while (true) {
+    page++;
+    let url = `https://rest.gohighlevel.com/v1/contacts/?limit=100`;
+    if (startAfterId) url += `&startAfterId=${startAfterId}`;
+
+    const resp = await fetch(url, {
+      headers: { Authorization: `Bearer ${GHL_TOKEN}` },
+    });
+
+    if (!resp.ok) {
+      const errText = await resp.text();
+      throw new Error(`GHL API error ${resp.status}: ${errText}`);
+    }
+
+    const body = await resp.json();
+    const contacts = body.contacts || [];
+
+    for (const c of contacts) {
+      const tags = (c.tags || []).map(t => t.toLowerCase());
+      if (tags.includes('sold')) {
+        sold.push(c);
+      }
+    }
+
+    if (contacts.length < 100) break; // last page
+    startAfterId = contacts[contacts.length - 1].id;
+
+    // Safety: bail after 300 pages (~30 000 contacts) to avoid runaway
+    if (page >= 300) break;
+  }
+
+  return sold;
+}
+
+// ── Aggregate contacts → county counts ───────────────────────────────────────
+function aggregateByCounty(contacts) {
+  const countyMap = {};
+
+  for (const c of contacts) {
+    const city = (c.city || '').trim();
+    const state = (c.state || '').trim();
+    if (!city || !state) continue;
+
+    // Try "City, STATE" lookup (case-insensitive)
+    const lookupKey = `${city}, ${state}`.toLowerCase();
+    const match = CITY_COUNTY_INDEX[lookupKey];
+    if (!match) continue;
+
+    const key = `${match.county}|${match.state}`;
+    if (!countyMap[key]) {
+      countyMap[key] = { county: match.county, state: match.state, count: 0, contacts: [] };
+    }
+    countyMap[key].count++;
+    const name = [c.firstName, c.lastName].filter(Boolean).join(' ').trim();
+    if (name) countyMap[key].contacts.push(name);
+  }
+
+  return Object.values(countyMap).sort((a, b) => b.count - a.count);
+}
+
+// ── Background refresh ────────────────────────────────────────────────────────
+async function triggerRefresh() {
+  if (refreshing) return;
+  refreshing = true;
+  try {
+    const contacts = await fetchAllSoldContacts();
+    const counties = aggregateByCounty(contacts);
+    cache = {
+      data: {
+        total: contacts.length,
+        counties,
+        lastUpdated: new Date().toISOString(),
+      },
+      timestamp: Date.now(),
+    };
+  } catch (err) {
+    console.error('Background GHL refresh failed:', err);
+  } finally {
+    refreshing = false;
+  }
+}
+
+// ── Handler ───────────────────────────────────────────────────────────────────
+export default async function handler(req, res) {
+  // CORS — allow iframe embedding from anywhere
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const now = Date.now();
+  const cacheAge = cache ? now - cache.timestamp : Infinity;
+  const cacheStale = cacheAge > CACHE_TTL_MS;
+
+  // If cache exists (even stale), return it immediately and refresh in background
+  if (cache) {
+    if (cacheStale) {
+      // Fire and forget — don't await
+      triggerRefresh().catch(console.error);
+    }
+    return res.status(200).json({
+      ...cache.data,
+      cacheAge: Math.round(cacheAge / 1000),
+      refreshing,
+    });
+  }
+
+  // No cache at all — must do a synchronous fetch (first cold start)
+  // Return a "loading" placeholder if a refresh is already running
+  if (refreshing) {
+    return res.status(202).json({
+      loading: true,
+      message: 'Data is being fetched for the first time. Retry in 30 seconds.',
+      total: 0,
+      counties: [],
+      lastUpdated: null,
+    });
+  }
+
+  // First ever request: fetch synchronously (will be slow ~45-60s on large accounts)
+  try {
+    await triggerRefresh();
+    return res.status(200).json({
+      ...cache.data,
+      cacheAge: 0,
+      refreshing: false,
+    });
+  } catch (err) {
+    console.error('county-map handler error:', err);
+    return res.status(500).json({ error: 'Failed to fetch GHL data', detail: err.message });
+  }
+}
